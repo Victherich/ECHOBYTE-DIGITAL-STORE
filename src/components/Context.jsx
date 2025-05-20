@@ -1,5 +1,6 @@
 import React, { createContext, useEffect, useState } from "react";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { use } from "react";
 
 export const Context = createContext();
 
@@ -65,8 +66,10 @@ const ContextProvider = ({ children }) => {
   
   
 
+const [searchResult, setSearchResult]=useState([])
+
   return (
-    <Context.Provider value={{ categories, currency, setCurrency }}>
+    <Context.Provider value={{ categories, currency, setCurrency, searchResult, setSearchResult }}>
       {children}
     </Context.Provider>
   );

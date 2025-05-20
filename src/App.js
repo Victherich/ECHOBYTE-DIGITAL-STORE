@@ -20,8 +20,35 @@ import MenuItem2 from './components/MenuItem2';
 import UpdateProductKeys from './components/UpdateProductKeys';
 import DeleteProductKey from './components/DeleteProductKey';
 import CurrencyToggle from './components/CurrencyToggle';
+import styled from 'styled-components';
+import logo from './Images/logo.webp';
+import SearchPage from './components/SearchPage';
+
 
 function App() {
+
+
+const LogoWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+  position:fixed;
+  top:10px;
+  left:10px;
+  z-index:1;
+`;
+
+const LogoImage = styled.img`
+  width: 60px;
+  height: 60px;
+  object-fit: contain;
+  border-radius: 50%;
+  cursor:pointer;
+`;
+
+
+
+
   return (
    <BrowserRouter>
    <ScrollToTop/>
@@ -30,6 +57,9 @@ function App() {
    <CurrencyToggle/>
    {/* <DeleteProductKey/> */}
    {/* <UpdateProductKeys/> */}
+     <LogoWrapper>
+        <LogoImage src={logo} alt="Echobyte Concept Logo" />
+      </LogoWrapper>
    <Header/>
       <Routes>
         <Route path='/' element={<LandingPage/>}/>
@@ -43,6 +73,7 @@ function App() {
         <Route path='/adminresetpassword' element={<AdminResetPassword/>}/>
         <Route path='/category/:id' element={<CategoryPage/>}/>
         <Route path='/allproducts' element={<AllProductsPage/>}/>
+        <Route path='/searchresults' element={<SearchPage/>}/>
 
       </Routes>
       {/* <CompanyCertificate/> */}

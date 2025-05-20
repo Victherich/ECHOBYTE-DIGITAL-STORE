@@ -585,6 +585,7 @@ const handleSubmit = async (e) => {
           />
 
           <Label>Product URL</Label>
+          Upload your digital product, to a public accessible link like Google drive and enter the link here:
           <Input
             type="url"
             name="url"
@@ -595,6 +596,7 @@ const handleSubmit = async (e) => {
           />
 
           <Label>Upload Cover Image</Label>
+          Upload the image you want to display as the product cover image:
 <Input type="file" onChange={handleFileChange} required />
 
 {previewUrl && (

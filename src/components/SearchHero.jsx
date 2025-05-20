@@ -99,16 +99,16 @@ const ActionButton = styled.button`
   }
 `;
 
-const AllProductsHero = () => {
+const SearchHero = () => {
 
 
   return (
-    <HeroWrapper>
+    <HeroWrapper> i
  
-      <Heading>ALL DIGITAL PRODUCTS</Heading>
-      <Subheading>
+      <Heading>Search Results</Heading>
+      {/* <Subheading>
   Discover premium digital products, tools, and templates designed to elevate your business, boost productivity, and bring your creative ideas to life — all in one place.
-</Subheading>
+</Subheading> */}
 <SearchBar/>
 
 
@@ -116,4 +116,4 @@ const AllProductsHero = () => {
   );
 };
 
-export default AllProductsHero;
+export default SearchHero;

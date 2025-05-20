@@ -1,34 +1,47 @@
 
 import React from 'react';
 import styled from 'styled-components';
-import logo from '../Images/logo.webp';
+
 import hero from '../Images/hero.jpg' // Ensure your logo image is in the public/assets folder or import correctly
+import SearchBar from './SearchBar';
 
 const HeroWrapper = styled.section`
-  padding: 6rem 2rem;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
   text-align: center;
-  background-image: url(${hero}); // Make sure this path matches your actual image
+  background-image: url(${hero}); // Ensure the image path is valid
   background-size: cover;
   background-position: center;
   color: white;
+  height: 100vh;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); // Black overlay with 50% opacity
+    z-index: 0;
+  }
+
+  > * {
+    position: relative;
+    z-index: 1;
+  }
 
   @media (max-width: 768px) {
     padding: 4rem 1rem;
   }
 `;
 
-const LogoWrapper = styled.div`
-  display: flex;
-  justify-content: center;
-  margin-bottom: 1.5rem;
-`;
 
-const LogoImage = styled.img`
-  width: 100px;
-  height: 100px;
-  object-fit: contain;
-  border-radius: 50%;
-`;
+
 
 const Heading = styled.h1`
   font-size: 2.5rem;
@@ -81,13 +94,12 @@ const HeroSection = () => {
 
   return (
     <HeroWrapper>
-      <LogoWrapper>
-        <LogoImage src={logo} alt="Echobyte Concept Logo" />
-      </LogoWrapper>
+    
       <Heading>ECHOBYTE DIGITAL STORE</Heading>
       <Subheading>
   Discover premium digital products, tools, and templates designed to elevate your business, boost productivity, and bring your creative ideas to life — all in one place.
 </Subheading>
+<SearchBar/>
 
 
     </HeroWrapper>
