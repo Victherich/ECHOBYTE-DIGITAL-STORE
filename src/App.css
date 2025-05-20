@@ -1,38 +1,88 @@
-.App {
+
+/* Swal2 Popup Global Styles */
+.swal2-popup {
+  background-color: #1f2937; /* Dark background (matching your theme) */
+  color: white; /* White text color */
+  border-radius: 16px; /* Rounded corners */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); /* Add some shadow for depth */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: auto; /* Adjust the size automatically */
+  padding: 2rem;
+  z-index: 9999; /* Ensure it's on top of other elements */
+  font-family: 'Arial', sans-serif; /* Use a clean font for readability */
+}
+
+/* Title */
+.swal2-popup .swal2-title {
+  font-family: sans-serif; 
+  font-size: 1.5rem; /* Adjust font size */
+  color: #facc15; /* Golden color for the title */
+  margin-bottom: 1rem; /* Space between title and text */
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+/* Text content inside the popup */
+.swal2-popup .swal2-text {
+  font-family: sans-serif;
+  font-size: 1rem;
+  color: #e5e7eb; /* Light gray color for text */
+  text-align: center;
+  margin-bottom: 1.5rem; /* Space before the buttons */
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+/* Confirm Button */
+.swal2-popup .swal2-confirm {
+  background-color: #facc15; /* Golden color for confirm button */
+  color: black;
+  font-weight: bold;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  border: none;
+  transition: background-color 0.3s ease;
+  cursor: pointer;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+/* Confirm button hover effect */
+.swal2-popup .swal2-confirm:hover {
+  background-color: #fde047; /* Lighter golden color when hovering */
+}
+
+/* Cancel Button */
+.swal2-popup .swal2-cancel {
+  background-color: #4b5563; /* Dark gray color for cancel button */
   color: white;
+  font-weight: bold;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  border: none;
+  margin-top: 0.5rem;
+  cursor: pointer;
 }
 
-.App-link {
-  color: #61dafb;
+/* Cancel button hover effect */
+.swal2-popup .swal2-cancel:hover {
+  background-color: #6b7280; /* Lighter gray color for hover */
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+/* Additional Styling for the Popup Overlay */
+.swal2-backdrop {
+  background-color: rgba(0, 0, 0, 0.4); /* Semi-transparent backdrop */
+}
+
+/* For small screens - you can adjust this if you need */
+@media (max-width: 600px) {
+  .swal2-popup {
+    width: 80%;
   }
-  to {
-    transform: rotate(360deg);
+
+  .swal2-popup .swal2-title {
+    font-size: 1.25rem;
+  }
+
+  .swal2-popup .swal2-text {
+    font-size: 0.875rem;
   }
 }
