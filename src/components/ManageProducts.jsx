@@ -361,10 +361,45 @@ const handleDelete = async (product) => {
       color: '#f9fafb'
     });
 
-    // Extract public ID correctly from URL
-    const urlParts = product.coverImageUrl.split('/');
-    const fileName = urlParts[urlParts.length - 1];
-    const publicId = fileName.split('.')[0]; // e.g., "abc123"
+    // option a from thr root deleting
+    // // Extract public ID correctly from URL
+    // const urlParts = product.coverImageUrl.split('/');
+    // const fileName = urlParts[urlParts.length - 1];
+    // const publicId = fileName.split('.')[0]; // e.g., "abc123"
+
+// option be from the folder deleting
+// const url = new URL(product.coverImageUrl);
+// const pathParts = url.pathname.split('/');
+// const fileNameWithExt = pathParts[pathParts.length - 1];
+// const fileName = fileNameWithExt.split('.')[0];
+
+// // If it's in a folder (length > 2 from '.../upload/folder/filename.jpg')
+// const folder = pathParts[pathParts.length - 2];
+// const isRoot = folder === 'upload'; // Cloudinary URL always has /upload/
+
+// const publicId = isRoot ? fileName : `${folder}/${fileName}`;
+
+
+
+// option c to for both deleting
+const url = new URL(product.coverImageUrl);
+const pathParts = url.pathname.split('/');
+
+const uploadIndex = pathParts.indexOf('upload');
+// Everything after "upload" is part of the public_id + version + filename
+const publicIdParts = pathParts.slice(uploadIndex + 1); // e.g., ["v1748679031", "digital_products", "qbsrlqnbtw0uqbtij2y8.jpg"]
+
+// Remove the version part (starts with "v" followed by numbers)
+if (publicIdParts[0].startsWith('v') && !isNaN(publicIdParts[0].substring(1))) {
+  publicIdParts.shift(); // Remove version
+}
+
+const fileNameWithExt = publicIdParts.pop(); // remove the filename
+const fileName = fileNameWithExt.split('.')[0]; // strip the extension
+
+publicIdParts.push(fileName); // rebuild without extension
+const publicId = publicIdParts.join('/');
+
 
     console.log(publicId);
 
@@ -482,10 +517,36 @@ const handleChangeProductImage = async (product) => {
       color: '#f9fafb'
     });
 
+    // option a for teh image change
     // Extract public ID correctly from URL
-    const urlParts = product.coverImageUrl.split('/');
-    const fileName = urlParts[urlParts.length - 1];
-    const publicId = fileName.split('.')[0]; // e.g., "abc123"
+    // const urlParts = product.coverImageUrl.split('/');
+    // const fileName = urlParts[urlParts.length - 1];
+    // const publicId = fileName.split('.')[0]; // e.g., "abc123"
+
+
+
+// option b for both oin and outside teh root or innder folder
+const url = new URL(product.coverImageUrl);
+const pathParts = url.pathname.split('/');
+
+const uploadIndex = pathParts.indexOf('upload');
+// Everything after "upload" is part of the public_id + version + filename
+const publicIdParts = pathParts.slice(uploadIndex + 1); // e.g., ["v1748679031", "digital_products", "qbsrlqnbtw0uqbtij2y8.jpg"]
+
+// Remove the version part (starts with "v" followed by numbers)
+if (publicIdParts[0].startsWith('v') && !isNaN(publicIdParts[0].substring(1))) {
+  publicIdParts.shift(); // Remove version
+}
+
+const fileNameWithExt = publicIdParts.pop(); // remove the filename
+const fileName = fileNameWithExt.split('.')[0]; // strip the extension
+
+publicIdParts.push(fileName); // rebuild without extension
+const publicId = publicIdParts.join('/');
+
+
+
+
 
     console.log(publicId);
     

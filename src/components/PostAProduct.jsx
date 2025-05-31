@@ -495,6 +495,7 @@ const handleSubmit = async (e) => {
     data.append('file', imageFile);
     data.append('upload_preset', 'echobyte_digital_store_upload');
     data.append('cloud_name', 'ddh4wrbok');
+    data.append('folder', 'digital_products');
 
     const res = await fetch('https://api.cloudinary.com/v1_1/ddh4wrbok/image/upload', {
       method: 'POST',
