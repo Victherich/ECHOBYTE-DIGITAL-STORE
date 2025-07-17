@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled, { keyframes } from "styled-components";
 import { Context } from "./Context";
@@ -40,7 +40,7 @@ const MenuButton = styled.div`
   color: white;
   font-size: 0.9rem;
   font-weight: 500;
-  padding: 5px 20px;
+  padding: 10px 20px;
   border-radius: 25px;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
   cursor: pointer;
@@ -76,13 +76,13 @@ const Dropdown = styled.ul`
 const MenuItem = styled.li`
   padding: 12px 15px;
   font-size: 16px;
-  font-weight: 500;
+  // font-weight: 500;
   display: flex;
   align-items: center;
   gap: 10px;
   cursor: pointer;
   transition: 0.3s;
-  color: #333;
+  color: #000080;
   
   &:hover {
     background: lightgray;
@@ -124,23 +124,38 @@ const Menu = () => {
     };
   }, []);
 
+  useEffect(()=>{
+    const id = setInterval(()=>{
+      setIsOpen(true);
+    },30*1000)
+
+    return()=>clearInterval(id)
+  },[])
+
 
 
   const menuItems = [
-  { name: "🏠 Home", link: "/" },
-  { name: "ℹ️ About Us", link: "/aboutus" },
-  { name: "📞 Contact us", link: "/contactus" },
+    // { name: "Echobyte Home", link: "https://echobyteconcept.com" },
+  { name: "Digital store Home", link: "/" },
+  // { name: "About Us", link: "/aboutus" },
+  // { name: " Contact us", link: "/contactus" },
 ];
 
   return (
     <MenuContainer id="menu-container">
       <MenuButton onClick={toggleMenu} onMouseEnter={()=>setIsOpen(true)}>📜 <span>View</span> Menu</MenuButton>
       <Dropdown isOpen={isOpen}>
+          <MenuItem onClick={() =>window.open('https://echobyteconcept.com')} >
+            Echobyte Home
+          </MenuItem>
         {menuItems.map((item, index) => (
           <MenuItem key={index} onClick={() => {setIsOpen(false);navigate(`${item.link}`)}} >
             {item.name}
           </MenuItem>
         ))}
+         <MenuItem onClick={() =>window.open('https://echobyteconcept.com/aboutus')} >
+            About Echobyte Concept
+          </MenuItem>
         <h4 style={{textAlign:"center", textDecoration:"underline", color:"#000050", fontSize:"0.9rem"}}>PRODUCT CATEGORIES</h4>
            <MenuItem onClick={() => {setIsOpen(false);navigate(`/allproducts`)}} >
             All Products

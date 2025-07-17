@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import PaymentModal from './PaymentModal';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { db } from '../firebaseConfig';
 import { doc, getDoc } from 'firebase/firestore';
 import logo from '../Images/logo.jpeg'
@@ -108,6 +108,7 @@ const ProductDetail = () => {
   const [productOutlines, setProductOutlines]=useState([]);
   // const [currency, setCurrency]=useState('NGN');
   const {currency, setCurrency}=useContext(Context);
+  const navigate = useNavigate();
 
   
 
@@ -224,6 +225,27 @@ useEffect(()=>{
            }
           </Outline>
           <BuyButton onClick={() => setShowModal(true)}>Get your's Now</BuyButton>
+<Title2 style={{fontSize:"1rem"}}>Notes:</Title2>
+           <Description>
+            <ul>
+              <li>
+ If you are purchasing in NGN, kindly ensure that the currecy switch is turned to NGN, but if you do not have NGN access, you can purchase in USD by turning the curreny switch to USD. 
+              </li>
+              <li>
+Please Ensure you enter your correct email address while purchasing
+              </li>
+              <li>
+                 After you have purchased, kindly check the email that you have entered as we must have sent the access to your purchased product there.
+              </li>
+              <li>
+In case you didn't receive the access email after your purchase for what so ever reason, kindly contact us <span style={{color:"orange", fontWeight:"bold", cursor:"pointer", textDecoration:"underline"}}
+onClick={()=>navigate('/contactus')}>HERE</span>, we are always available to help you. Thanks.
+              </li>
+            </ul>
+           </Description>
+           <Description></Description>
+            <Description></Description>
+          
         </Info>
       </ContentWrapper>
 

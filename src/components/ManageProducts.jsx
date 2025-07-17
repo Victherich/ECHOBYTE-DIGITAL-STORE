@@ -405,7 +405,8 @@ const publicId = publicIdParts.join('/');
 
 
     // Call your API endpoint with the expected JSON body key
-    const res = await fetch('http://localhost:3000/api/deleteproductimage', {
+    // const res = await fetch('http://localhost:3000/api/deleteproductimage', {
+      const res = await fetch('https://echobyteconcept.vercel.app/api/deleteproductimage', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ public_id: publicId }),
@@ -552,7 +553,7 @@ const publicId = publicIdParts.join('/');
     
 
     // Call your API endpoint with the expected JSON body key
-    const res = await fetch('http://localhost:3000/api/deleteproductimage', {
+    const res = await fetch('https://echobyteconcept.vercel.app/api/deleteproductimage', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ public_id: publicId }),

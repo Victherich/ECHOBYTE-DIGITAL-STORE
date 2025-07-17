@@ -23,6 +23,7 @@ import CurrencyToggle from './components/CurrencyToggle';
 import styled from 'styled-components';
 import logo from './Images/logo.webp';
 import SearchPage from './components/SearchPage';
+import ContactForm from './components/Contactus';
 
 
 function App() {
@@ -53,7 +54,7 @@ const LogoImage = styled.img`
    <BrowserRouter>
    <ScrollToTop/>
    <Menu/>
-   <MenuItem2/>
+   {/* <MenuItem2/> */}
    <CurrencyToggle/>
    {/* <DeleteProductKey/> */}
    {/* <UpdateProductKeys/> */}
@@ -74,6 +75,7 @@ const LogoImage = styled.img`
         <Route path='/category/:id' element={<CategoryPage/>}/>
         <Route path='/allproducts' element={<AllProductsPage/>}/>
         <Route path='/searchresults' element={<SearchPage/>}/>
+        <Route path='/contactus' element={<ContactForm/>}/>
 
       </Routes>
       {/* <CompanyCertificate/> */}
