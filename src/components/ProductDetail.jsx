@@ -1,13 +1,13 @@
 import React, { useContext, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import PaymentModal from './PaymentModal';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { db } from '../firebaseConfig';
 import { doc, getDoc } from 'firebase/firestore';
-import logo from '../Images/logo.jpeg'
+// import logo from '../Images/logo.jpeg'
 import { collection, query, where, orderBy, getDocs } from 'firebase/firestore';
 import { Context } from './Context';
-import CurrencyToggle from './CurrencyToggle';
+// import CurrencyToggle from './CurrencyToggle';
 
 // Styled components
 const Container = styled.div`
@@ -66,11 +66,11 @@ const Title2 = styled.h1`
  
 `;
 
-const Price = styled.p`
-  font-size: 1.5rem;
-  color: #facc15;
-  margin-bottom: 1rem;
-`;
+// const Price = styled.p`
+//   font-size: 1.5rem;
+//   color: #facc15;
+//   margin-bottom: 1rem;
+// `;
 
 const Description = styled.p`
   line-height: 1.6;
@@ -87,7 +87,8 @@ const BuyButton = styled.button`
   transition: background-color 0.3s;
   cursor:pointer;
   border:none;
-  margin-bottom:50px;
+  margin-bottom:30px;
+  width:200px;
 
   &:hover {
     background-color: gray;
@@ -101,14 +102,39 @@ margin-bottom:50px;
   }
 `
 
+
+const PriceContainer = styled.div`
+  display: flex;
+  justify-content: flex-start;
+  align-items: baseline;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+`;
+
+const MainPrice = styled.span`
+  color: #facc15;
+  font-size: 1rem;
+  font-weight: 700;
+`;
+
+const SubPrice = styled.span`
+  color: #9ca3af; /* Tailwind gray-400 */
+  font-size: 1rem;
+  font-weight: 500;
+`;
+
+
+
+
+
 const ProductDetail = () => {
   const [product, setProduct] = useState(null);
-  const [showModal, setShowModal] = useState(false);
+  const {showModal, setShowModal} = useContext(Context);
   const { id } = useParams();
   const [productOutlines, setProductOutlines]=useState([]);
   // const [currency, setCurrency]=useState('NGN');
   const {currency, setCurrency}=useContext(Context);
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   
 
@@ -204,15 +230,15 @@ useEffect(()=>{
         />
         <Info>
           <Title>{product.title.toUpperCase()}</Title>
-         {currency === 'NGN' ? (
-  <Price>₦{new Intl.NumberFormat('en-US').format(product.priceInNgn)}</Price>
-) : (
-  <Price>${new Intl.NumberFormat('en-US').format(product.priceInUsd)}</Price>
-)}
+<PriceContainer>
+  <MainPrice>₦{new Intl.NumberFormat('en-US').format(product.priceInNgn)}</MainPrice>
+  <SubPrice>(${new Intl.NumberFormat('en-US').format(product.priceInUsd)})</SubPrice>
+</PriceContainer>
 
           
           <Description>{product.description}</Description>
-           <BuyButton onClick={() => setShowModal(true)}>Buy Now</BuyButton>
+           <BuyButton onClick={() => {setShowModal(true);setCurrency('NGN')}}>Buy Now (₦{new Intl.NumberFormat('en-US').format(product.priceInNgn)})</BuyButton><br/>
+           <BuyButton onClick={() => {setShowModal(true);setCurrency('USD')}}>Buy Now (${new Intl.NumberFormat('en-US').format(product.priceInUsd)})</BuyButton>
           <Outline>
             <Title2>Outline:</Title2>
            {
@@ -224,12 +250,12 @@ useEffect(()=>{
             ))
            }
           </Outline>
-          <BuyButton onClick={() => setShowModal(true)}>Get your's Now</BuyButton>
-<Title2 style={{fontSize:"1rem"}}>Notes:</Title2>
-           <Description>
+          {/* <BuyButton onClick={() => setShowModal(true)}>Get your's Now</BuyButton> */}
+{/* <Title2 style={{fontSize:"1rem"}}>Important Notes:</Title2> */}
+           {/* <Description>
             <ul>
               <li>
- If you are purchasing in NGN, kindly ensure that the currecy switch is turned to NGN, but if you do not have NGN access, you can purchase in USD by turning the curreny switch to USD. 
+ If you are purchasing in NGN, kindly ensure that the currecy switch is turned to NGN, but if you do not have NGN access, you can purchase in USD by turning the curreny switch on top of the page to USD. 
               </li>
               <li>
 Please Ensure you enter your correct email address while purchasing
@@ -242,7 +268,7 @@ In case you didn't receive the access email after your purchase for what so ever
 onClick={()=>navigate('/contactus')}>HERE</span>, we are always available to help you. Thanks.
               </li>
             </ul>
-           </Description>
+           </Description> */}
            <Description></Description>
             <Description></Description>
           

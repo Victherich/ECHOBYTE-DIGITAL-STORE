@@ -2,7 +2,6 @@
 
 import React from 'react';
 import styled from 'styled-components';
-import logo from '../Images/logo.webp';
 import hero from '../Images/allproduct.jpg' // Ensure your logo image is in the public/assets folder or import correctly
 import SearchBar from './SearchBar';
 
@@ -15,7 +14,7 @@ const HeroWrapper = styled.section`
   background-position: center;
   color: white;
   overflow: hidden;
-    height: 100vh;
+    height: 50vh;
    display: flex;
   justify-content: center;
   align-items: center;
@@ -40,18 +39,18 @@ const HeroWrapper = styled.section`
 `;
 
 
-const LogoWrapper = styled.div`
-  display: flex;
-  justify-content: center;
-  margin-bottom: 1.5rem;
-`;
+// const LogoWrapper = styled.div`
+//   display: flex;
+//   justify-content: center;
+//   margin-bottom: 1.5rem;
+// `;
 
-const LogoImage = styled.img`
-  width: 100px;
-  height: 100px;
-  object-fit: contain;
-  border-radius: 50%;
-`;
+// const LogoImage = styled.img`
+//   width: 100px;
+//   height: 100px;
+//   object-fit: contain;
+//   border-radius: 50%;
+// `;
 
 const Heading = styled.h1`
   font-size: 2.5rem;
@@ -64,40 +63,40 @@ const Heading = styled.h1`
   }
 `;
 
-const Subheading = styled.p`
-  font-size: 1.125rem;
-  max-width: 900px;
-  margin: 0 auto;
-  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.9);
+// const Subheading = styled.p`
+//   font-size: 1.125rem;
+//   max-width: 900px;
+//   margin: 0 auto;
+//   text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.9);
 
-  @media (min-width: 768px) {
-    font-size: 1.25rem;
-  }
-`;
+//   @media (min-width: 768px) {
+//     font-size: 1.25rem;
+//   }
+// `;
 
-const ButtonGroup = styled.div`
-  margin-top: 2.5rem;
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 1.5rem;
-`;
+// const ButtonGroup = styled.div`
+//   margin-top: 2.5rem;
+//   display: flex;
+//   justify-content: center;
+//   flex-wrap: wrap;
+//   gap: 1.5rem;
+// `;
 
-const ActionButton = styled.button`
-  background-color: #facc15;
-  color: black;
-  font-weight: bold;
-  font-size: 1.125rem;
-  padding: 0.75rem 1.5rem;
-  border-radius: 9999px;
-  border: none;
-  cursor: pointer;
-  transition: background-color 0.3s;
+// const ActionButton = styled.button`
+//   background-color: #facc15;
+//   color: black;
+//   font-weight: bold;
+//   font-size: 1.125rem;
+//   padding: 0.75rem 1.5rem;
+//   border-radius: 9999px;
+//   border: none;
+//   cursor: pointer;
+//   transition: background-color 0.3s;
 
-  &:hover {
-    background-color: #fde047;
-  }
-`;
+//   &:hover {
+//     background-color: #fde047;
+//   }
+// `;
 
 const SearchHero = () => {
 

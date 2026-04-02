@@ -1,13 +1,13 @@
 
-import React, { useContext, useEffect, useState } from 'react';
+import React, {  useEffect, useState } from 'react';
 import styled from 'styled-components';
-import logo from '../Images/logo.webp'
+// import logo from '../Images/logo.webp'
 import { db } from '../firebaseConfig';
-import { collection, getDocs, deleteDoc, doc, query, where } from 'firebase/firestore';
+import { collection, getDocs,} from 'firebase/firestore';
 import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
-import { use } from 'react';
-import { Context } from './Context';
+
+import AccessCoursesCTA from './AccessCoursesCTA';
 
 const Section = styled.section`
   background-color: #111827; // Tailwind bg-gray-900
@@ -72,12 +72,12 @@ const CardTitle = styled.h3`
   margin-bottom: 0.5rem;
 `;
 
-const Price = styled.p`
-  color: #facc15;
-  font-size: 1.125rem;
-  font-weight: 500;
-  margin-bottom: 1rem;
-`;
+// const Price = styled.p`
+//   color: #facc15;
+//   font-size: 1.125rem;
+//   font-weight: 500;
+//   margin-bottom: 1rem;
+// `;
 
 const CTAButton = styled.a`
   display: inline-block;
@@ -95,10 +95,32 @@ const CTAButton = styled.a`
   }
 `;
 
+
+const PriceContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+`;
+
+const MainPrice = styled.span`
+  color: #facc15;
+  font-size: 1rem;
+  font-weight: 700;
+`;
+
+const SubPrice = styled.span`
+  color: #9ca3af; /* Tailwind gray-400 */
+  font-size: 1rem;
+  font-weight: 500;
+`;
+
+
 const AllProducts = () => {
   const [products, setProducts] = useState([]);
   const navigate = useNavigate();
-  const {currency}=useContext(Context);
+  // const {currency}=useContext(Context);
 
 
 
@@ -141,17 +163,18 @@ const fetchAllProducts = async () => {
 
   return (
     <Section id="products">
+      <AccessCoursesCTA/>
       <Title>All Digital Products</Title>
+      
       <Grid>
         {products.map((product, index) => (
           <Card key={index}>
             <ProductImage src={product.coverImageUrl} alt={product.title} />
              <CardTitle>{product.title.toUpperCase().slice(0,50)}{product.title.length>50?'...':""}</CardTitle>
-            {currency === 'NGN' ? (
-  <Price>₦{new Intl.NumberFormat('en-US').format(product.priceInNgn)}</Price>
-) : (
-  <Price>${new Intl.NumberFormat('en-US').format(product.priceInUsd)}</Price>
-)}
+      <PriceContainer>
+  <MainPrice>₦{new Intl.NumberFormat('en-US').format(product.priceInNgn)}</MainPrice>
+  <SubPrice>(${new Intl.NumberFormat('en-US').format(product.priceInUsd)})</SubPrice>
+</PriceContainer>
 
             <CTAButton onClick={()=>navigate(`/productdetail/${product.id}`)}>View</CTAButton>
           </Card>

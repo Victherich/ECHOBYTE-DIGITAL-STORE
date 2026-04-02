@@ -183,6 +183,7 @@ import Swal from "sweetalert2";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebaseConfig";
 import { onAuthStateChanged } from 'firebase/auth';
+import ForgotPasswordModal from "./ForgotPasswordModal";
 
 
 const Container = styled.div`
@@ -246,9 +247,27 @@ const Button = styled.button`
   font-weight: 600;
   cursor: pointer;
   transition: background-color 0.3s;
-
+  margin-bottom:10px;
   &:hover {
     background-color: #fde047;
+  }
+`;
+
+
+const Button2 = styled.button`
+  width: 100%;
+  background: #10b981;
+  color: #000;
+  padding: 0.75rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin-bottom:10px;
+  &:hover {
+    background-color: gray;
   }
 `;
 
@@ -269,6 +288,8 @@ const AdminLogin = () => {
     const [loading, setLoading] = useState(true);
     const [authenticated, setAuthenticated] = useState(false);
   const [form, setForm] = useState({ email: "", password: "" });
+  const [showForgotPassword, setShowForgotPassword] = useState(false);
+
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -288,7 +309,7 @@ const AdminLogin = () => {
       const { email, password } = form;
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
       Swal.fire("Success ✅", "Logged in successfully", "success");
-      navigate("/admindashboard");
+      navigate("/dashboard");
     } catch (error) {
       Swal.fire("Login Failed ❌", error.message, "error");
     }
@@ -306,7 +327,7 @@ const AdminLogin = () => {
 
 
     if(authenticated){
-      navigate('/admindashboard');
+      navigate('/dashboard');
       return;
     }
 
@@ -317,7 +338,7 @@ const AdminLogin = () => {
   return (
     <Container>
       <FormWrapper>
-        <Title>Admin Login</Title>
+        <Title>Login</Title>
         <form onSubmit={handleLogin}>
           <Label>Email</Label>
           <Input
@@ -336,11 +357,19 @@ const AdminLogin = () => {
             required
           />
           <Button type="submit">Login</Button>
+          
         </form>
-        <RegisterText onClick={() => navigate("/adminsignup")}>
+        <Button2 onClick={() => navigate("/accountinfo")}>
           Don't have an account? Register
-        </RegisterText>
+        </Button2>
+        <Button2 onClick={() => setShowForgotPassword(true)}>
+          Forgot Password?
+        </Button2>
+  <Button2 type="button" onClick={()=>navigate('/')} >Back to Home</Button2>
       </FormWrapper>
+      {showForgotPassword && (
+        <ForgotPasswordModal onClose={() => setShowForgotPassword(false)} />
+      )}
     </Container>
   );
 };

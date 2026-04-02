@@ -4,6 +4,7 @@ import CategoryProducts from './CategoryProducts'
 import { use } from 'react'
 import { useParams } from 'react-router-dom'
 import { Context } from './Context'
+import AccessCoursesCTA from './AccessCoursesCTA'
 
 const CategoryPage = () => {
     const {id}=useParams();
@@ -18,6 +19,7 @@ const CategoryPage = () => {
   return (
     <div>
       <CategoryHero selectedCategory={selectedCategory}/>
+      <AccessCoursesCTA/>
       <CategoryProducts id={id} selectedCategory={selectedCategory}/>
     </div>
   )

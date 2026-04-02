@@ -282,7 +282,7 @@
 // export default AdminDashboard;
 
 
-import React, { useState } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import styled from 'styled-components';
 import { FaBars, FaTimes } from 'react-icons/fa';
 import { signOut } from 'firebase/auth';
@@ -293,6 +293,14 @@ import AdminSignup from './AdminSignUp.jsx';
 import PostAProduct from './PostAProduct.jsx';
 import AdminProfile from './AdminProfile.jsx';
 import AllProducts2 from './ManageProducts.jsx';
+// import { getAuth, onAuthStateChanged } from 'firebase/auth';
+import { doc, getDoc } from 'firebase/firestore';
+import { db } from '../firebaseConfig'; // adjust path as needed
+import { Context } from './Context.jsx';
+import UserTransactions from './UserTransactions.jsx';
+import FirstLoginPasswordModal from './FirstLoginPasswordModal.jsx';
+import AllUsersPage from './AllUsersPage.jsx';
+import AllTransactionsPage from './AllTransactionsPage.jsx';
 
 // Styled Components
 const DashboardContainer = styled.div`
@@ -314,6 +322,7 @@ const Sidebar = styled.div`
   height: 100%;
   z-index: 7;
   border-right: 1px solid #374151;
+   padding-top:50px;
 
   @media (min-width: 768px) {
     width: 250px;
@@ -338,6 +347,7 @@ const SidebarMenu = styled.ul`
   display: flex;
   flex-direction: column;
   gap: 5px;
+ 
 `;
 
 const SidebarMenuItem = styled.li`
@@ -368,7 +378,7 @@ const ContentArea = styled.div`
 
 const Hamburger = styled.div`
   position: fixed;
-  top: 50px;
+  top: 80px;
   left: 5px;
   background: #facc15;
   color: #111827;
@@ -401,6 +411,10 @@ const AdminDashboard = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeMenu, setActiveMenu] = useState('profile');
   const navigate = useNavigate();
+    const {user, role} = useContext(Context);
+      const [showModal, setShowModal] = useState(false);
+  const [userData, setUserData] = useState(null);
+
 
   const handleLogout = () => {
     Swal.fire({
@@ -422,7 +436,7 @@ const AdminDashboard = () => {
               timer: 2000,
               showConfirmButton: false,
             });
-            navigate('/adminlogin');
+            navigate('/login');
           })
           .catch((error) => {
             Swal.fire('Error', error.message, 'error');
@@ -449,10 +463,42 @@ const AdminDashboard = () => {
         return <AllProducts2/>;
       case 'adminsignup':
         return <AdminSignup />;
+         case 'transactions':
+        return <UserTransactions />;
+          case 'allusers':
+        return <AllUsersPage />;
+          case 'alltransactions':
+        return <AllTransactionsPage />;
       default:
         return <h1 style={{ color: '#facc15' }}>Dashboard Home</h1>;
     }
   };
+
+
+  
+ 
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      const user = auth.currentUser;
+      if (!user) return;
+
+      const userRef = doc(db, "users", user.uid);
+      const userSnap = await getDoc(userRef);
+
+      if (userSnap.exists()) {
+        const data = userSnap.data();
+        setUserData(data);
+
+        // 👇 Show modal only if firstLogin is true
+        if (data.firstLogin) {
+          setShowModal(true);
+        }
+      }
+    };
+
+    fetchUser();
+  }, []);
 
   return (
     <DashboardContainer>
@@ -461,36 +507,68 @@ const AdminDashboard = () => {
       </Hamburger>
       <Overlay isOpen={menuOpen} onClick={() => setMenuOpen(false)} />
       <Sidebar isOpen={menuOpen}>
-        <SidebarHeader>Admin Dashboard</SidebarHeader>
+        <SidebarHeader>Dashboard</SidebarHeader>
         <SidebarMenu>
-          <SidebarMenuItem
-            active={activeMenu === 'profile'}
-            onClick={() => handleMenuClick('profile')}
-          >
-            Hi, Admin
-          </SidebarMenuItem>
-           <SidebarMenuItem
+        <SidebarMenuItem
+  active={activeMenu === 'profile'}
+  onClick={() => handleMenuClick('profile')}
+>
+  Hi, {user?.displayName?.split(' ')[0] || ''}
+</SidebarMenuItem>
+
+        {role==='admin'?<SidebarMenuItem
             active={activeMenu === 'postaproduct'}
             onClick={() => handleMenuClick('postaproduct')}
           >
             Post A Product
-          </SidebarMenuItem>
-          <SidebarMenuItem
+          </SidebarMenuItem>:''}
+          {role==='admin'?<SidebarMenuItem
             active={activeMenu === 'manageproducts'}
             onClick={() => handleMenuClick('manageproducts')}
           >
             Manage Products
-          </SidebarMenuItem>
-          <SidebarMenuItem
+          </SidebarMenuItem>:""}
+          {role==='admin'?<SidebarMenuItem
             active={activeMenu === 'adminsignup'}
             onClick={() => handleMenuClick('adminsignup')}
           >
             Register Admin
+          </SidebarMenuItem>:''}
+
+  <SidebarMenuItem
+            active={activeMenu === 'transactions'}
+            onClick={() => handleMenuClick('transactions')}
+          >
+          My Courses
           </SidebarMenuItem>
+
+             {role==='admin'?<SidebarMenuItem
+            active={activeMenu === 'allusers'}
+            onClick={() => handleMenuClick('allusers')}
+          >
+            All Users
+          </SidebarMenuItem>:''}
+
+           {role==='admin'?<SidebarMenuItem
+            active={activeMenu === 'alltransactions'}
+            onClick={() => handleMenuClick('alltransactions')}
+          >
+            All Transactions
+          </SidebarMenuItem>:''}
+
+
           <SidebarMenuItem onClick={handleLogout}>Logout</SidebarMenuItem>
         </SidebarMenu>
       </Sidebar>
       <ContentArea isOpen={menuOpen}>{renderContent()}</ContentArea>
+
+       {/* Modal that blocks everything */}
+      {showModal && (
+        <FirstLoginPasswordModal
+          userId={userData?.uid}
+          onClose={() => setShowModal(false)}
+        />
+      )}
     </DashboardContainer>
   );
 };

@@ -2,7 +2,7 @@
 import React, { useContext, useState } from 'react';
 import styled from 'styled-components';
 import { db } from '../firebaseConfig';
-import { collection, getDocs, deleteDoc, doc, query, where } from 'firebase/firestore';
+import { collection, getDocs, } from 'firebase/firestore';
 import { Context } from './Context';
 import { useNavigate } from 'react-router-dom';
  import Swal from 'sweetalert2';
@@ -60,7 +60,7 @@ const SearchButton = styled.button`
 
 const SearchBar = () => {
   const [searchTerm, setSearchTerm] = useState('');
-  const {searchResult, setSearchResult} =useContext(Context);
+  const { setSearchResult} =useContext(Context);
   const navigate = useNavigate();
   
 

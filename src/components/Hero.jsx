@@ -65,29 +65,29 @@ const Subheading = styled.p`
   }
 `;
 
-const ButtonGroup = styled.div`
-  margin-top: 2.5rem;
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 1.5rem;
-`;
+// const ButtonGroup = styled.div`
+//   margin-top: 2.5rem;
+//   display: flex;
+//   justify-content: center;
+//   flex-wrap: wrap;
+//   gap: 1.5rem;
+// `;
 
-const ActionButton = styled.button`
-  background-color: #facc15;
-  color: black;
-  font-weight: bold;
-  font-size: 1.125rem;
-  padding: 0.75rem 1.5rem;
-  border-radius: 9999px;
-  border: none;
-  cursor: pointer;
-  transition: background-color 0.3s;
+// const ActionButton = styled.button`
+//   background-color: #facc15;
+//   color: black;
+//   font-weight: bold;
+//   font-size: 1.125rem;
+//   padding: 0.75rem 1.5rem;
+//   border-radius: 9999px;
+//   border: none;
+//   cursor: pointer;
+//   transition: background-color 0.3s;
 
-  &:hover {
-    background-color: #fde047;
-  }
-`;
+//   &:hover {
+//     background-color: #fde047;
+//   }
+// `;
 
 const HeroSection = () => {
 

@@ -4,7 +4,6 @@ import styled from 'styled-components';
 import Swal from 'sweetalert2';
 import { doc, updateDoc } from 'firebase/firestore';
 import { db } from '../firebaseConfig';
-import { use } from 'react';
 import { Context } from './Context';
 
 const Overlay = styled.div`

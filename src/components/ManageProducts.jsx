@@ -6,12 +6,13 @@ import { db } from '../firebaseConfig';
 import { collection, getDocs, deleteDoc, doc, query, where, updateDoc } from 'firebase/firestore';
 import { Context } from './Context';
 import Swal from 'sweetalert2';
-import { Navigate, useNavigate } from 'react-router-dom';
+
 import OutlineModal from './PostOutlineModal';
 import ViewOutlineModal from './ViewOutlinesModal';
-import { use } from 'react';
+// import { use } from 'react';
 import ProductEditModal from './ProductEditModal';
-import logo from '../Images/logo.jpeg'
+// import logo from '../Images/logo.jpeg'
+import LessonsModal from './LessonsModal';
 
 // Styled Components
 const PageContainer = styled.div`
@@ -171,7 +172,7 @@ const ManageProducts = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('');
   const {categories}=useContext(Context);
-  const navigate = useNavigate();
+
   const [showOutlineModal, setShowOutlineModal]=useState(false);
    const [showOutlineModal2, setShowOutlineModal2]=useState(false);
   const [selectedProductId, setSelectedProductId]=useState(null);
@@ -180,8 +181,9 @@ const ManageProducts = () => {
 const [currentProduct, setCurrentProduct] = useState(null);
   const [selectedCategoryName, setSelectedCategoryName] = useState('') ;
    const [expandedProduct, setExpandedProduct] = useState(null); // new state
+   const [showLessonsModal, setShowLessonsModal]=useState(false);
 
-   console.log(products)
+  //  console.log(products)
 
 
 
@@ -427,8 +429,11 @@ const publicId = publicIdParts.join('/');
       background: '#1f2937',
       color: '#f9fafb'
     });
+
   } catch (error) {
+
     console.error('Deletion error:', error);
+
     Swal.fire({
       title: 'Error!',
       text: 'Something went wrong during deletion.',
@@ -436,6 +441,7 @@ const publicId = publicIdParts.join('/');
       background: '#1f2937',
       color: '#f9fafb'
     });
+
   }
 };
 
@@ -685,6 +691,17 @@ const publicId = publicIdParts.join('/');
                <ActionButton variant="view" onClick={() => {setShowOutlineModal2(true);setSelectedProductId(product.id);setSelectedProductTitle(product.title)}}>Veiw / Edit Outline</ActionButton>
            
             </ButtonGroup>
+
+            <ActionButton
+  variant="view"
+  onClick={() => {
+    setShowLessonsModal(true);
+    setSelectedProductId(product.id);
+    setSelectedProductTitle(product.title);
+  }}
+>
+  Manage Lessons
+</ActionButton>
             </>}
           </ProductCard>
         ))}
@@ -718,6 +735,16 @@ const publicId = publicIdParts.join('/');
     onClose={() => setEditModalOpen(false)}
     onUpdate={handleProductUpdate}
     selectedProductTitle={selectedProductTitle}
+  />
+)}
+
+
+
+{showLessonsModal && (
+  <LessonsModal
+    productId={selectedProductId}
+    selectedProductTitle={selectedProductTitle}
+    onClose={() => setShowLessonsModal(false)}
   />
 )}
 

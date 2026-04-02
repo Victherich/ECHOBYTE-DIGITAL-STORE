@@ -108,12 +108,13 @@
 
 
 
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import { doc, getDoc, updateDoc } from 'firebase/firestore';
 import { db } from '../firebaseConfig'; // adjust path as needed
 import Swal from 'sweetalert2';
+import { Context } from './Context';
 
 const PageContainer = styled.div`
   min-height: 100vh;
@@ -211,7 +212,7 @@ const EditButton = styled.button`
 `;
 
 const AdminProfile = () => {
-  const [user, setUser] = useState(null);
+  const {user, setUser, setRole} = useContext(Context);
   const [phone, setPhone] = useState('');
   const [isEditing, setIsEditing] = useState(false);
 
@@ -220,9 +221,10 @@ const AdminProfile = () => {
     const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
       if (currentUser) {
         setUser(currentUser);
-        const docSnap = await getDoc(doc(db, 'admins', currentUser.uid));
+        const docSnap = await getDoc(doc(db, 'users', currentUser.uid));
         if (docSnap.exists()) {
           setPhone(docSnap.data().phone || '');
+          setRole(docSnap.data().role||"");
         }
       }
     });
@@ -232,7 +234,7 @@ const AdminProfile = () => {
 
   const handlePhoneSave = async () => {
     try {
-      await updateDoc(doc(db, 'admins', user.uid), {
+      await updateDoc(doc(db, 'users', user.uid), {
         phone: phone,
       });
 

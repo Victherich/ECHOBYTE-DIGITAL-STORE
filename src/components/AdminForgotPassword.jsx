@@ -57,17 +57,17 @@ const Button = styled.button`
   }
 `;
 
-const Message = styled.p`
-  margin-top: 1rem;
-  color: ${({ success }) => (success ? '#000050' : 'red')};
-  text-align: center;
-  font-size: 0.95rem;
-`;
+// const Message = styled.p`
+//   margin-top: 1rem;
+//   color: ${({ success }) => (success ? '#000050' : 'red')};
+//   text-align: center;
+//   font-size: 0.95rem;
+// `;
 
 const AdminForgotPassword = () => {
   const [email, setEmail] = useState('');
-  const [message, setMessage] = useState('');
-  const [success, setSuccess] = useState(false);
+  // const [message, setMessage] = useState('');
+  // const [success, setSuccess] = useState(false);
   const navigate = useNavigate();
   const [buttonText, setButtonText]=useState("Send Reset Link")
 
@@ -139,7 +139,7 @@ const AdminForgotPassword = () => {
 
         </Form>
         <p onClick={()=>navigate("/adminlogin")} style={{color:"#000050", cursor:"pointer"}}>Back to Login</p>
-        {message && <Message success={success}>{message}</Message>}
+        {/* {message && <Message success={success}>{message}</Message>} */}
       </FormWrapper>
     </Container>
   );

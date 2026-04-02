@@ -107,6 +107,7 @@ const AdminSignup = () => {
     phone: "",
     password: "",
     confirmPassword: "",
+    role:'admin'
   });
 
   const handleChange = (e) => {
@@ -134,18 +135,19 @@ const AdminSignup = () => {
     });
 
     try {
-      const { name, email, phone, password } = form;
+      const { name, email, phone, password, role } = form;
 
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
       const user = userCredential.user;
 
       await updateProfile(user, { displayName: name });
 
-      await setDoc(doc(db, "admins", user.uid), {
+      await setDoc(doc(db, "users", user.uid), {
         uid: user.uid,
         name,
         email,
         phone,
+        role,
         createdAt: new Date(),
       });
 

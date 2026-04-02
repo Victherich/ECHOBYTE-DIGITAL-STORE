@@ -14,7 +14,7 @@ const HeroWrapper = styled.section`
   background-position: center;
   color: white;
   overflow: hidden;
-  height: 100vh;
+  height: 50vh;
    display: flex;
   justify-content: center;
   align-items: center;

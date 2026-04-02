@@ -1,12 +1,8 @@
 
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect,} from 'react';
 import styled from 'styled-components';
-import logo from '../Images/logo.webp'
-import { db } from '../firebaseConfig';
-import { collection, getDocs, deleteDoc, doc, query, where } from 'firebase/firestore';
-import Swal from 'sweetalert2';
+
 import { useLocation, useNavigate } from 'react-router-dom';
-import { use } from 'react';
 import { Context } from './Context';
 
 const Section = styled.section`
@@ -96,7 +92,7 @@ const CTAButton = styled.a`
 `;
 
 const SearchResults = () => {
- const {searchResult, setSearchResult} =useContext(Context);
+ const {searchResult} =useContext(Context);
   const navigate = useNavigate();
   const {currency}=useContext(Context);
   const location = useLocation();

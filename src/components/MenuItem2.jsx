@@ -1,19 +1,19 @@
-import React, { useContext, useState } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
-import styled, { keyframes } from "styled-components";
-import { Context } from "./Context";
+import styled from "styled-components";
+// import { Context } from "./Context";
 
-// Slide down animation
-const slideDown = keyframes`
-  0% { opacity: 0; transform: translateY(-10px); }
-  100% { opacity: 1; transform: translateY(0); }
-`;
+// // Slide down animation
+// const slideDown = keyframes`
+//   0% { opacity: 0; transform: translateY(-10px); }
+//   100% { opacity: 1; transform: translateY(0); }
+// `;
 
-// Slide up animation
-const slideUp = keyframes`
-  0% { opacity: 1; transform: translateY(0); }
-  100% { opacity: 0; transform: translateY(-10px); }
-`;
+// // Slide up animation
+// const slideUp = keyframes`
+//   0% { opacity: 1; transform: translateY(0); }
+//   100% { opacity: 0; transform: translateY(-10px); }
+// `;
 
 const MenuContainer = styled.div`
   position: fixed;
@@ -57,38 +57,38 @@ const MenuButton = styled.div`
   }
 `;
 
-const Dropdown = styled.ul`
-  position: absolute;
-  top: 50px;
-  right: 0;
-  // background:rgba(255,255,255,0.5);
-  background: white;
-  width: 200px;
-  border-radius: 10px;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
-  padding: 0;
-  margin: 0;
-  list-style: none;
-  overflow: hidden;
-  animation: ${({ isOpen }) => (isOpen ? slideDown : slideUp)} 0.4s ease-out;
-  display: ${({ isOpen }) => (isOpen ? "block" : "none")};
-`;
+// const Dropdown = styled.ul`
+//   position: absolute;
+//   top: 50px;
+//   right: 0;
+//   // background:rgba(255,255,255,0.5);
+//   background: white;
+//   width: 200px;
+//   border-radius: 10px;
+//   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+//   padding: 0;
+//   margin: 0;
+//   list-style: none;
+//   overflow: hidden;
+//   animation: ${({ isOpen }) => (isOpen ? slideDown : slideUp)} 0.4s ease-out;
+//   display: ${({ isOpen }) => (isOpen ? "block" : "none")};
+// `;
 
-const MenuItem = styled.li`
-  padding: 12px 15px;
-  font-size: 16px;
-  font-weight: 500;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  cursor: pointer;
-  transition: 0.3s;
-  color: #333;
+// const MenuItem = styled.li`
+//   padding: 12px 15px;
+//   font-size: 16px;
+//   font-weight: 500;
+//   display: flex;
+//   align-items: center;
+//   gap: 10px;
+//   cursor: pointer;
+//   transition: 0.3s;
+//   color: #333;
   
-  &:hover {
-    background: lightgray;
-  }
-`;
+//   &:hover {
+//     background: lightgray;
+//   }
+// `;
 
 // Icons
 // const menuItems = [
@@ -102,19 +102,19 @@ const MenuItem = styled.li`
 // ];
 
 const MenuItem2 = () => {
-  const [isOpen, setIsOpen] = useState(false);
+  // const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
-  const {categories}=useContext(Context);
+  // const {categories}=useContext(Context);
 
   // Toggle menu open/close
-  const toggleMenu = () => {
-    setIsOpen(!isOpen);
-  };
+  // const toggleMenu = () => {
+  //   setIsOpen(!isOpen);
+  // };
 
   // Close menu when clicking outside
   const closeMenu = (e) => {
     if (!e.target.closest("#menu-container")) {
-      setIsOpen(false);
+      // setIsOpen(false);
     }
   };
 
@@ -127,11 +127,11 @@ const MenuItem2 = () => {
 
 
 
-  const menuItems = [
-  { name: "🏠 Home", link: "/" },
-  { name: "ℹ️ About Us", link: "/aboutus" },
-  { name: "📞 Contact us", link: "/contactus" },
-];
+//   const menuItems = [
+//   { name: "🏠 Home", link: "/" },
+//   { name: "ℹ️ About Us", link: "/aboutus" },
+//   { name: "📞 Contact us", link: "/contactus" },
+// ];
 
   return (
     <MenuContainer id="menu-container">
