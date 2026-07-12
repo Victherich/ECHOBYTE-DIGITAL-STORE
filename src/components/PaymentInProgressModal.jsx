@@ -131,6 +131,7 @@ import Swal from "sweetalert2";
 import styled, { keyframes } from "styled-components";
 import { useDispatch } from "react-redux";
 import { clearPaymentSession } from "../Features/Slice";
+import VerifyPaymentButton from "./VerifyPaymentButton";
 
 // === Spinner Animation ===
 const spin = keyframes`
@@ -278,6 +279,7 @@ const PaymentInProgressModal = ({ onCancel }) => {
         <Message>
           <span>{messages[messageIndex]}</span>
           <br /><br/>
+          <VerifyPaymentButton/>
           <span>
             If you have not paid yet or wish to cancel, click below.
           </span>
