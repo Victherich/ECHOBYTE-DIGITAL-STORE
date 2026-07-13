@@ -95,9 +95,10 @@ const HeroSection = () => {
   return (
     <HeroWrapper>
     
-      <Heading>ECHOBYTE DIGITAL STORE</Heading>
-      <Subheading>
-  Discover premium digital products, tools, and templates designed to elevate your business, boost productivity, and bring your creative ideas to life — all in one place.
+     <Heading>ECHOBYTE COURSES</Heading>
+
+<Subheading>
+  Discover high-quality online courses designed to help you learn in-demand skills, advance your career, grow your business, and achieve your personal and professional goals—all in one place.
 </Subheading>
 <SearchBar/>
 

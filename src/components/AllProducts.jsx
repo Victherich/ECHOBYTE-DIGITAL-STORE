@@ -164,7 +164,7 @@ const fetchAllProducts = async () => {
   return (
     <Section id="products">
       <AccessCoursesCTA/>
-      <Title>All Digital Products</Title>
+      <Title>All Courses</Title>
       
       <Grid>
         {products.map((product, index) => (

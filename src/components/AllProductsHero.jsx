@@ -105,10 +105,10 @@ const AllProductsHero = () => {
   return (
     <HeroWrapper>
  
-      <Heading>ALL DIGITAL PRODUCTS</Heading>
-      <Subheading>
+      <Heading>ALL COURSES</Heading>
+      {/* <Subheading>
   Discover premium digital products, tools, and templates designed to elevate your business, boost productivity, and bring your creative ideas to life — all in one place.
-</Subheading>
+</Subheading> */}
 <SearchBar/>
 
 

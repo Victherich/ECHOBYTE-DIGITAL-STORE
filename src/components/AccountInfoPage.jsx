@@ -73,13 +73,13 @@ export default function AccountInfoPage() {
       <Box>
         <Title>Access Your Account</Title>
         <Text>
-          An account is created for you automatically when you purchase a product.
+          An account is created for you automatically when you purchase a Course.
           <br />
              <Button variant="products" onClick={() => navigate('/allproducts')}>
             View Products
           </Button>
           <br />
-          If you already purchased, please log in to access your products.
+          If you already purchased, please log in to access your Courses.
           <br />
           <br />
           If you are a returning customer, you can purchase again — your new products will be

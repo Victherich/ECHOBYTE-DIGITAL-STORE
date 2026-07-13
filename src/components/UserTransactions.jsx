@@ -203,9 +203,9 @@ const UserTransactions = () => {
                     ? `₦${new Intl.NumberFormat("en-US").format(tx.amountPaid)}`
                     : `$${new Intl.NumberFormat("en-US").format(tx.amountPaid)}`}
                 </MainPrice>
-                {tx.currency === "NGN" && tx.product?.priceInUsd && (
+                {/* {tx.currency === "NGN" && tx.product?.priceInUsd && (
                   <SubPrice>(${tx.product.priceInUsd})</SubPrice>
-                )}
+                )} */}
               </PriceContainer>
 
               <InfoText>Payment Method: {tx.paymentMethod}</InfoText>

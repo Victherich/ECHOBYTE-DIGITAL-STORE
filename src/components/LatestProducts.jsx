@@ -187,7 +187,7 @@ const fetchAllProducts = async () => {
 
   return (
     <Section id="products">
-      <Title>Latest Digital Products</Title>
+      <Title>Latest Courses</Title>
       <Grid>
         {products.slice(0,6).map((product, index) => (
           <Card key={index}>
@@ -207,7 +207,7 @@ const fetchAllProducts = async () => {
 
       <Button2Wrap>
              <CTAButton2 onClick={()=>navigate('/allproducts')}>
-        View All Digital Produts
+        View All Courses
       </CTAButton2>
       </Button2Wrap>
      

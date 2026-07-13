@@ -1,7 +1,7 @@
 
 import './App.css';
 import Footer from './components/Footer';
-import Header from './components/Header';
+// import Header from './components/Header';
 import LandingPage from './components/LandingPage';
 import {BrowserRouter, Routes, Route} from 'react-router-dom'
 import ProductDetail from './components/ProductDetail';
@@ -12,7 +12,7 @@ import AdminSignup from './components/AdminSignUp';
 import AdminForgotPassword from './components/AdminForgotPassword';
 import AdminResetPassword from './components/AdminResetPassword';
 import ScrollToTop from './components/ScrollToTop';
-import Menu from './components/Menu';
+// import Menu from './components/Menu';
 // import CompanyCertificate from './components/CompanyCertificate';
 import CategoryPage from './components/CategoryPage';
 import AllProductsPage from './components/AllProductsPage';
@@ -29,6 +29,9 @@ import AppUpdate from './components/AppUpdate';
 import AccountInfoPage from './components/AccountInfoPage';
 import PaymentInProgressModal from './components/PaymentInProgressModal';
 import { useSelector } from 'react-redux';
+import Header2 from './components/Header2';
+import TermsAndConditions from './components/TermsAndConditions';
+import PrivacyPolicy from './components/PrivacyPolicy';
 
 
 
@@ -41,14 +44,14 @@ const paymentSession = useSelector(state=>state.paymentSession);
   return (
    <BrowserRouter>
    <ScrollToTop/>
-   <Menu/>
+   {/* <Menu/> */}
    <AppUpdate/>
    {/* <MenuItem2/> */}
    {/* <CurrencyToggle/> */}
    {/* <DeleteProductKey/> */}
    {/* <UpdateProductKeys/> */}
     
-   <Header/>
+   <Header2/>
       <Routes>
         <Route path='/' element={<LandingPage/>}/>
         <Route path='/productdetail/:id' element={<ProductDetail/>}/>
@@ -65,6 +68,8 @@ const paymentSession = useSelector(state=>state.paymentSession);
         <Route path='/contactus' element={<ContactForm/>}/>
         <Route path='/comingsoon' element={<ComingSoon/>}/>
         <Route path='/accountinfo' element={<AccountInfoPage/>}/>
+        <Route path='/termsandconditions' element={<TermsAndConditions/>}/>
+        <Route path='/privacypolicy' element={<PrivacyPolicy/>}/>
       </Routes>
       {/* <CompanyCertificate/> */}
       {paymentSession&&<PaymentInProgressModal/>}

@@ -100,6 +100,9 @@ export default function AccessCoursesCTA() {
         <SubText>
        Log in to access your purchased courses and continue building the skills that shape your future.
         </SubText>
+<SubText>
+          An account is created for you automatically when you purchase a Course.
+   </SubText>       
 
         <ButtonGroup>
           <Button primary onClick={() => navigate("/login")}>
