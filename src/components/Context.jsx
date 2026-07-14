@@ -316,7 +316,7 @@ useEffect(() => {
     Swal.fire({text:"Please wait..."});
     Swal.showLoading();
     try {
-      const { name, email, phone, paymentMethod } = customerDetails;
+      const { name, email, phone, paymentMethod,password } = customerDetails;
 
          // ✅ Retrieve pending values from localStorage
     const amount = JSON.parse(localStorage.getItem("pendingAmount"));
@@ -339,7 +339,7 @@ useEffect(() => {
         const userCredential = await createUserWithEmailAndPassword(
           auth,
           email,
-          randomPassword
+          password
         );
         const user = userCredential.user;
 
@@ -352,7 +352,7 @@ useEffect(() => {
           phone,
           role: "user",
           createdAt: new Date(),
-          firstLogin: true, // 👈 Important!
+          // firstLogin: true, // 👈 Important!
         });
 
         userId = user.uid;
@@ -382,7 +382,7 @@ useEffect(() => {
       await addDoc(collection(db, "transactions"), transactionDetails);
 
       // Step 3: Send emails
-      await sendTransactionEmails(transactionDetails);
+      sendTransactionEmails(transactionDetails);
 
       Swal.fire({
         icon: "success",
@@ -390,6 +390,7 @@ useEffect(() => {
           "Purchase successful! An email has been sent to you. Please proceed to your dashboard. ",
       });
 // navigate('/dashboard');
+window.location.href = "/dashboard";
 setTransactionSuccess(true);
       
     } catch (error) {

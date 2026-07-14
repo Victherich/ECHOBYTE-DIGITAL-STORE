@@ -1,13 +1,27 @@
-import React, { useState } from "react";
+import React, { useState , useEffect} from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import logo from "../Images/logo.jpeg";
-import { useSelector } from "react-redux";
+// import { useSelector } from "react-redux";
+import { auth } from "../firebaseConfig"; // Import your firebase auth instance
+import { onAuthStateChanged } from "firebase/auth"; // Import listener
 
 const Header2 = () => {
   const [menuOpen, setMenuOpen] = useState(false);
-const userToken = useSelector(state => state.userToken);
   const closeMenu = () => setMenuOpen(false);
+const [user, setUser] = useState(null);
+  // Sync with Firebase Auth
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser);
+    });
+    return () => unsubscribe(); // Cleanup listener
+  }, []);
+
+  // Determine navigation based on auth state
+  const loginPath = user ? "/dashboard" : "/login";
+  const loginLabel = user ? "Dashboard" : "Login";
+  
 
   return (
     <Container>
@@ -21,8 +35,7 @@ const userToken = useSelector(state => state.userToken);
           <NavLink to="/">Home</NavLink>
           <NavLink to="/allproducts">All Courses</NavLink>
           <NavLink to="/contactus">Contact Us</NavLink>
-          <LoginButton to="/login">{userToken ? "Dashboard" : "Login"}</LoginButton>
-         
+          <LoginButton to={loginPath}>{loginLabel}</LoginButton>
         </DesktopNav>
 
         <Hamburger onClick={() => setMenuOpen(!menuOpen)}>
@@ -45,8 +58,8 @@ const userToken = useSelector(state => state.userToken);
           Contact Us
         </MobileLink>
 
-        <MobileLogin to="/login" onClick={closeMenu}>
-          {userToken ? "Dashboard" : "Login"}
+        <MobileLogin to={loginPath} onClick={closeMenu}>
+          {loginLabel}
         </MobileLogin>
       </MobileMenu>
     </Container>
@@ -61,7 +74,7 @@ const Container = styled.header`
   position: sticky;
   top: 0;
   width: 100%;
-  z-index: 1000;
+  z-index: 100;
 
   background: #111827;
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);

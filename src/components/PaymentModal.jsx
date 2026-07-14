@@ -366,7 +366,7 @@ const Overlay = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 1;
+  z-index: 300;
 `;
 
 const ModalWrapper = styled.div`
@@ -467,6 +467,8 @@ const PaymentModal = ({
   const [confirmEmail, setConfirmEmail] = useState("");
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const dispatch = useDispatch();
   const {startPaymentPolling1, saveTransaction}= useContext(Context)
 
@@ -502,6 +504,7 @@ const PaymentModal = ({
     name,
     email,
     phone,
+    password,
     paymentMethod: "Paystack",
   };
 
@@ -704,6 +707,22 @@ localStorage.setItem("verificationNumber", JSON.stringify(verificationNumber));
               placeholder="Phone Number"
               value={phone}
               onChange={(e) => setPhone(e.target.value)}
+              required
+            />
+
+             <Input
+              type="password"
+              placeholder="Enter your prefered password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+
+              <Input
+              type="password"
+              placeholder="Enter your password again to confirm"
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
               required
             />
 
