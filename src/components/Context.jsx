@@ -52,7 +52,7 @@ const dispatch = useDispatch();
 
 
 
-  //  const [currency, setCurrency]=useState('USD');
+
   
   // Initialize currency from localStorage or default to 'USD'
   const [currency, setCurrency] = useState(() => {
@@ -75,7 +75,7 @@ const [transactionSuccess, setTransactionSuccess]=useState(false)
 
  const [showModal, setShowModal] = useState(false);
 
-// const handleClearPaymentSession = ()=>{
+
 //    dispatch(clearPaymentSession());
 // }
 
@@ -277,17 +277,7 @@ const startPaymentPolling1 = (paymentType) => {
   };
 };
 
-// ============================================
-// 🪄 Example usage inside Context or useEffect
-// ============================================
-// useEffect(() => {
-//   const stopPolling = startPaymentPolling1("payment1");
 
-//   // Cleanup on unmount
-//   return () => {
-//     if (stopPolling) stopPolling();
-//   };
-// }, []);
 
 
 useEffect(() => {
@@ -334,7 +324,7 @@ useEffect(() => {
 
       if (querySnapshot.empty) {
         console.log("User not found, creating new user...");
-        const randomPassword = Math.random().toString(36).slice(-8);
+        // const randomPassword = Math.random().toString(36).slice(-8);
 
         const userCredential = await createUserWithEmailAndPassword(
           auth,

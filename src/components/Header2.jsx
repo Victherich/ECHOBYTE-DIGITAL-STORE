@@ -1,4 +1,4 @@
-import React, { useState , useEffect} from "react";
+import React, { useState , useEffect, useRef} from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import logo from "../Images/logo.jpeg";
@@ -9,8 +9,10 @@ import { onAuthStateChanged } from "firebase/auth"; // Import listener
 const Header2 = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const closeMenu = () => setMenuOpen(false);
+  const containerRef = useRef(null);
 const [user, setUser] = useState(null);
   // Sync with Firebase Auth
+
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
@@ -18,13 +20,29 @@ const [user, setUser] = useState(null);
     return () => unsubscribe(); // Cleanup listener
   }, []);
 
+
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      // If the menu is open and the click is outside the containerRef
+      if (menuOpen && containerRef.current && !containerRef.current.contains(event.target)) {
+        closeMenu();
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [menuOpen]);
+
+
+
   // Determine navigation based on auth state
   const loginPath = user ? "/dashboard" : "/login";
   const loginLabel = user ? "Dashboard" : "Login";
   
 
   return (
-    <Container>
+    <Container ref={containerRef}>
       <Wrapper>
         <LogoSection to="/" onClick={closeMenu}>
           <Logo src={logo} alt="Logo" />
