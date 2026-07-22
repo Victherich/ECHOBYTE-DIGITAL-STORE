@@ -38,7 +38,7 @@ const [user, setUser] = useState(null);
 
   // Determine navigation based on auth state
   const loginPath = user ? "/dashboard" : "/login";
-  const loginLabel = user ? "Dashboard" : "Login";
+  const loginLabel = user ? "My Dashboard" : "Login";
   
 
   return (

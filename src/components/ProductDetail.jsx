@@ -96,11 +96,17 @@ const BuyButton = styled.button`
 `;
 
 const Outline = styled.div`
-margin-bottom:50px;
-  ul{
-  padding-left:20px;
+  margin-bottom: 50px;
+  /* Ensures the container respects boundaries and forces long words to break */
+  max-width: 100%;
+  overflow-wrap: break-word;
+  word-break: break-word;
+  hyphens: auto;
+
+  ul { 
+    padding-left: 20px;
   }
-`
+`;
 
 
 const PriceContainer = styled.div`

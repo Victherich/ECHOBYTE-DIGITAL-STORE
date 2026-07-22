@@ -11,7 +11,7 @@ import AccessCoursesCTA from './AccessCoursesCTA';
 
 const Section = styled.section`
   background-color: #111827; // Tailwind bg-gray-900
-  padding: 5rem 1.5rem;
+  padding: 5rem 0.9rem;
 `;
 
 const Title = styled.h2`

@@ -25,6 +25,7 @@ const Overlay = styled.div`
   justify-content: center;
   align-items: center;
   z-index: 300;
+  width:100%;
 `;
 
 const ModalWrapper = styled.div`
@@ -36,8 +37,12 @@ const ModalWrapper = styled.div`
   max-width: 540px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
   border: 1px solid #374151;
-  height:90%;
+  // height:90%;
   overflow-y:scroll;
+
+  @media (max-width: 768px) {
+  max-width: 300px;
+  }
 `;
 
 const Title = styled.h2`
@@ -431,7 +436,7 @@ const handleLoginExistingUser = async () => {
   return (
     <Overlay>
       <ModalWrapper>
-        <Title>Complete Payment</Title>
+        <Title>Proceed with Payment</Title>
        {!openPayPal && 
          <FormGroup>
             {/* <form onSubmit={handlePaymentFormSubmit}>
