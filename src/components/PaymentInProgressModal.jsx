@@ -192,7 +192,7 @@ const Countdown = styled.div`
 `;
 
 const CancelButton = styled.button`
-  background-color: lightgray;
+  background-color: gray;
   color: white;
   border: none;
   padding: 0.75rem 1.5rem;

@@ -730,6 +730,8 @@ const AdminProfile = ({ onNavigateCourses, onNavigateReferral, onLogout }) => {
     });
   };
 
+
+
   if (!user) {
     return (
       <LoadingWrap>
@@ -788,12 +790,12 @@ const AdminProfile = ({ onNavigateCourses, onNavigateReferral, onLogout }) => {
                 <span>(Start Learning)</span>
               </QuickActionButton>
 
-              <QuickActionButton onClick={onNavigateReferral}>
+              {/* <QuickActionButton onClick={onNavigateReferral}>
                 <QuickActionIconWrap>
                   <FaGift />
                 </QuickActionIconWrap>
                 <span>Referral</span>
-              </QuickActionButton>
+              </QuickActionButton> */}
 
               <QuickActionButton $danger onClick={handleLogoutClick}>
                 <QuickActionIconWrap $danger>
@@ -836,7 +838,7 @@ const AdminProfile = ({ onNavigateCourses, onNavigateReferral, onLogout }) => {
             </ProgressCaption>
           </Panel>
 
-          <ReferralBanner>
+          {/* <ReferralBanner>
             <ReferralText>
               <strong>Invite friends, earn rewards</strong>
               {referralCount} successful referral{referralCount === 1 ? '' : 's'} so far · code{' '}
@@ -846,7 +848,7 @@ const AdminProfile = ({ onNavigateCourses, onNavigateReferral, onLogout }) => {
               <FaGift style={{ marginRight: '0.4rem' }} />
               Go to Referrals
             </ReferralButton>
-          </ReferralBanner>
+          </ReferralBanner> */}
         </Column>
 
         {/* RIGHT COLUMN */}
@@ -908,7 +910,7 @@ const AdminProfile = ({ onNavigateCourses, onNavigateReferral, onLogout }) => {
             </DetailRow>
           </Panel>
 
-          <Panel>
+          {/* <Panel>
             <PanelHeader>
               <PanelTitle>
                 <FaGift /> Referral Snapshot
@@ -931,7 +933,7 @@ const AdminProfile = ({ onNavigateCourses, onNavigateReferral, onLogout }) => {
               <FaCopy style={{ marginRight: '0.4rem' }} />
               Copy Referral Code
             </ReferralButton>
-          </Panel>
+          </Panel> */}
         </Column>
       </Grid>
     </PageContainer>
