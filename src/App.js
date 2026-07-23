@@ -32,6 +32,7 @@ import { useSelector } from 'react-redux';
 import Header2 from './components/Header2';
 import TermsAndConditions from './components/TermsAndConditions';
 import PrivacyPolicy from './components/PrivacyPolicy';
+import VirtualAssistantPromo from './components/VAPromoPage';
 
 
 
@@ -70,6 +71,7 @@ const paymentSession = useSelector(state=>state.paymentSession);
         <Route path='/accountinfo' element={<AccountInfoPage/>}/>
         <Route path='/termsandconditions' element={<TermsAndConditions/>}/>
         <Route path='/privacypolicy' element={<PrivacyPolicy/>}/>
+        <Route path='/vapromo' element={<VirtualAssistantPromo/>}/>
       </Routes>
       {/* <CompanyCertificate/> */}
       {paymentSession&&<PaymentInProgressModal/>}
