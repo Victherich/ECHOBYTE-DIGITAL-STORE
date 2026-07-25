@@ -31,7 +31,7 @@ const Overlay = styled.div`
 const ModalWrapper = styled.div`
   background: #1f2937;
   color: #f9fafb;
-  padding: 2.5rem;
+  padding: 10px;
   border-radius: 1.25rem;
   width: 100%;
   max-width: 540px;
@@ -396,7 +396,7 @@ const handlePaymentFormSubmit = (e) => {
   Swal.fire({
     title: "Are You Ready to Pay Now?",
     text: "You are about to start the payment process now.",
-    icon: "success",
+    // icon: "success",
     showCancelButton: true,
     confirmButtonText: "Start Now",
     cancelButtonText: "Cancel",
@@ -430,10 +430,10 @@ const checkUserExists = async () => {
 
     if (querySnapshot.empty) {
       setFormStep("new_user"); // Show full registration form
-      Swal.fire({ icon: "success", text: "A new account will be created for you." });
+      Swal.fire({ text: "A new account will be created for you." });
     } else {
       setFormStep("existing_user"); // Show login/password form
-      Swal.fire({ icon: "success", text: "An account with this email exists. Click OK to log in." });
+      Swal.fire({ text: "An account with this email exists. Click OK to log in." });
     }
     // Swal.close();
   } catch (err) {
@@ -466,7 +466,7 @@ const triggerPayment = () => {
   Swal.fire({
     title: "Login successful. Are you Ready to Pay Now?",
     text: "You are about to start the payment process now.",
-    icon: "info",
+    // icon: "info",
     showCancelButton: true,
     confirmButtonText: "Start Now",
     cancelButtonText: "Cancel",
@@ -488,7 +488,7 @@ const handleLoginExistingUser = async () => {
   Swal.showLoading();
   try {
     await signInWithEmailAndPassword(auth, email, password);
-    Swal.fire({ icon: "success", text: "Login successful!" });
+    // Swal.fire({ icon: "success", text: "Login successful!" });
     
     // Call the payment trigger, NOT the form handler
     triggerPayment(); 
@@ -593,7 +593,7 @@ const handleLoginExistingUser = async () => {
       <PasswordContainer>
   <Input
     type={showConfirmPassword ? "text" : "password"}
-    placeholder="Enter your password again to confirm"
+    placeholder="Enter password again"
     value={confirmPassword}
     onChange={(e) => setConfirmPassword(e.target.value)}
     required

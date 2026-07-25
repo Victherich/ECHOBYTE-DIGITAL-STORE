@@ -75,7 +75,7 @@
 /* For small screens - you can adjust this if you need */
 @media (max-width: 600px) {
   .swal2-popup {
-    width: 80%;
+    /* width: 80%; */
   }
 
   .swal2-popup .swal2-title {

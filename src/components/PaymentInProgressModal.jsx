@@ -285,7 +285,8 @@ const PaymentInProgressModal = ({ onCancel }) => {
           <span>{messages[messageIndex]}</span>
         </Message>
 
-       <Title> If you have not paid yet or wish to cancel, click CANCEL</Title>
+       <Title> If you have not paid, click CANCEL to start payment</Title>
+        <Title> Not yet Ready? click CANCEL</Title>
 
         <CancelButton onClick={handleCancel}>CANCEL</CancelButton>
       </ModalBox>
