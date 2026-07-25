@@ -4,7 +4,7 @@ import {Context} from './Context'
 import Swal from "sweetalert2";
 
 const VerifyPaymentButton = ({
-  text = "I've Completed Payment",
+  text = "I HAVE PAID",
   className,
 }) => {
   const { startPaymentPolling1 } = useContext(Context);

@@ -147,13 +147,13 @@ const Overlay = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 2;
+  z-index: 300;
 `;
 
 const ModalBox = styled.div`
   background: #fff;
   border-radius: 16px;
-  padding: 2.5rem 2rem;
+  padding:1rem;
   width: 90%;
   max-width: 420px;
   text-align: center;
@@ -178,10 +178,10 @@ const Title = styled.h2`
 `;
 
 const Message = styled.p`
-  font-size: 1rem;
+  font-size: 0.8rem;
   color: #555;
-  margin-bottom: 1.8rem;
-  line-height: 1.6;
+  margin: 5px;
+  // line-height: 1.6;
 `;
 
 const Countdown = styled.div`
@@ -215,10 +215,10 @@ const PaymentInProgressModal = ({ onCancel }) => {
   const [messageIndex, setMessageIndex] = useState(0);
 
   const messages = [
-    "Please wait while we verify your payment.",
+    "We are trying to verify if you have paid.",
     "Please ensure that you actually made the payment from your bank app.",
     "Please ensure that the payment was successful.",
-    "Your payment seems not to have reached us.",
+    "Your payment seems not to have reached us yet.",
     "After long waiting and this persists, you can cancel the payment and contact our support team and also check with your bank, your payment seem not to have reached us.",
   ];
 
@@ -274,20 +274,20 @@ const PaymentInProgressModal = ({ onCancel }) => {
     <Overlay>
       <ModalBox>
         <Spinner />
-        <Title>Payment in Progress</Title>
+        <Title style={{textDecoration:"underline"}}>You started a Payment Process...</Title>
+
+         <Title>If you have paid, Click the I HAVE PAID button below</Title>
+
+         <VerifyPaymentButton/>
+
  <Countdown>⏳ {timeLeft}s</Countdown>
         <Message>
           <span>{messages[messageIndex]}</span>
-          <br /><br/>
-          <VerifyPaymentButton/>
-          <span>
-            If you have not paid yet or wish to cancel, click below.
-          </span>
         </Message>
 
-       
+       <Title> If you have not paid yet or wish to cancel, click CANCEL</Title>
 
-        <CancelButton onClick={handleCancel}>Cancel Payment</CancelButton>
+        <CancelButton onClick={handleCancel}>CANCEL</CancelButton>
       </ModalBox>
     </Overlay>
   );

@@ -332,35 +332,84 @@ localStorage.setItem("verificationNumber", JSON.stringify(verificationNumber));
 
 
 
-  // ------------------- RENDER -------------------
-  const handlePaymentFormSubmit = (e) => {
-    e.preventDefault();
-      if (email !== confirmEmail) {
-      Swal.fire({ text: "Emails do not match!" });
-      return;
-    }
-     if (password !== confirmPassword) {
-      Swal.fire({ text: "Passwords do not match!" });
-      return;
-    }
+//   // ------------------- RENDER -------------------
+//   const handlePaymentFormSubmit = (e) => {
+//     e.preventDefault();
+//       if (email !== confirmEmail) {
+//       Swal.fire({ text: "Emails do not match!" });
+//       return;
+//     }
+//      if (password !== confirmPassword) {
+//       Swal.fire({ text: "Passwords do not match!" });
+//       return;
+//     }
   
- const alphanumericRegex = /^[a-zA-Z0-9]+$/;
+//  const alphanumericRegex = /^[a-zA-Z0-9]+$/;
 
-if (password.length < 6) {
-  Swal.fire({ text: "Password must be at least 6 characters long!" });
-  return;
-}
+// if (password.length < 6) {
+//   Swal.fire({ text: "Password must be at least 6 characters long!" });
+//   return;
+// }
 
-if (!alphanumericRegex.test(password)) {
-  Swal.fire({ text: "Password can only contain letters and numbers (no special characters)!" });
-  return;
-}
+// if (!alphanumericRegex.test(password)) {
+//   Swal.fire({ text: "Password can only contain letters and numbers (no special characters)!" });
+//   return;
+// }
 
-    if (currency === "NGN") {payWithPaystack();}
-    else {
-      setOpenPayPal(true);
+//     if (currency === "NGN") {payWithPaystack();}
+//     else {
+//       setOpenPayPal(true);
+//     }
+//   };
+
+
+
+
+
+// ------------------- RENDER -------------------
+const handlePaymentFormSubmit = (e) => {
+  e.preventDefault();
+
+  if (email !== confirmEmail) {
+    Swal.fire({ text: "Emails do not match!" });
+    return;
+  }
+
+  if (password !== confirmPassword) {
+    Swal.fire({ text: "Passwords do not match!" });
+    return;
+  }
+
+  const alphanumericRegex = /^[a-zA-Z0-9]+$/;
+
+  if (password.length < 6) {
+    Swal.fire({ text: "Password must be at least 6 characters long!" });
+    return;
+  }
+
+  if (!alphanumericRegex.test(password)) {
+    Swal.fire({ text: "Password can only contain letters and numbers (no special characters)!" });
+    return;
+  }
+
+  // Validation successful - Show confirmation before starting payment
+  Swal.fire({
+    title: "Are You Ready to Pay Now?",
+    text: "You are about to start the payment process now.",
+    icon: "success",
+    showCancelButton: true,
+    confirmButtonText: "Start Now",
+    cancelButtonText: "Cancel",
+  }).then((result) => {
+    if (result.isConfirmed) {
+      if (currency === "NGN") {
+        payWithPaystack();
+      } else {
+        setOpenPayPal(true);
+      }
     }
-  };
+  });
+};
 
 
 
@@ -384,7 +433,7 @@ const checkUserExists = async () => {
       Swal.fire({ icon: "success", text: "A new account will be created for you." });
     } else {
       setFormStep("existing_user"); // Show login/password form
-      Swal.fire({ icon: "success", text: "An account with this email exists. Please log in." });
+      Swal.fire({ icon: "success", text: "An account with this email exists. Click OK to log in." });
     }
     // Swal.close();
   } catch (err) {
@@ -404,12 +453,32 @@ const checkUserExists = async () => {
 // };
 
 // 1. Create a function specifically for starting the payment
+// const triggerPayment = () => {
+//   if (currency === "NGN") {
+//     payWithPaystack();
+//   } else {
+//     setOpenPayPal(true);
+//   }
+// };
+
+// 1. Create a function specifically for starting the payment with confirmation
 const triggerPayment = () => {
-  if (currency === "NGN") {
-    payWithPaystack();
-  } else {
-    setOpenPayPal(true);
-  }
+  Swal.fire({
+    title: "Login successful. Are you Ready to Pay Now?",
+    text: "You are about to start the payment process now.",
+    icon: "info",
+    showCancelButton: true,
+    confirmButtonText: "Start Now",
+    cancelButtonText: "Cancel",
+  }).then((result) => {
+    if (result.isConfirmed) {
+      if (currency === "NGN") {
+        payWithPaystack();
+      } else {
+        setOpenPayPal(true);
+      }
+    }
+  });
 };
 
 
