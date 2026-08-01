@@ -282,10 +282,10 @@ const CalloutText = styled.p`
 const VirtualAssistantPromo = () => {
   const enrollmentUrl = 'https://chat.whatsapp.com/JJwtnyd8MRs1f04mSrTAMi?s=cl&p=a&ilr=1&amv=1';
 
-  useEffect(() => {
-    // Direct same-tab redirection on page load
-    window.location.href = enrollmentUrl;
-  }, [enrollmentUrl]);
+  // useEffect(() => {
+  //   // Direct same-tab redirection on page load
+  //   window.location.href = enrollmentUrl;
+  // }, [enrollmentUrl]);
 
   return (
     <PageContainer>
