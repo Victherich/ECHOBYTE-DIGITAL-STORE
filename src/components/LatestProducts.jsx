@@ -11,7 +11,7 @@ import { useNavigate } from 'react-router-dom';
 
 const Section = styled.section`
   background-color: #111827; // Tailwind bg-gray-900
-  padding: 5rem 1.5rem;
+  padding: 1rem 1rem;
 `;
 
 const Title = styled.h2`
@@ -19,7 +19,7 @@ const Title = styled.h2`
   font-size: 2rem;
   font-weight: bold;
   text-align: center;
-  margin-bottom: 4rem;
+  margin-bottom: 1rem;
   letter-spacing: -0.025em;
 
   @media (min-width: 768px) {

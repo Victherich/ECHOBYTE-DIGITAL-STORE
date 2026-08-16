@@ -4,20 +4,20 @@ import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 
 const Container = styled.div`
-  background-color: #111827;
+  // background-color: #111827;
   color: #f9fafb;
-  min-height: 100vh;
+  // min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 2rem;
+  padding: 1rem;
 `;
 
 const Box = styled.div`
-  background-color: #1f2937;
-  padding: 3rem;
+  // background-color: #1f2937;
+  padding: 1rem;
   border-radius: 1rem;
-  max-width: 600px;
+  // max-width: 600px;
   width: 100%;
   text-align: center;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);

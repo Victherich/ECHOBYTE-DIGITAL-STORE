@@ -226,7 +226,7 @@ useEffect(()=>{
   return (
     <Container>
       {/* <CurrencyToggle/> */}
-      <ContentWrapper>
+      {/* <ContentWrapper>
         <Image
           src={product.coverImageUrl}
           alt={product.title}
@@ -256,30 +256,68 @@ useEffect(()=>{
             ))
            }
           </Outline>
-          {/* <BuyButton onClick={() => setShowModal(true)}>Get your's Now</BuyButton> */}
-{/* <Title2 style={{fontSize:"1rem"}}>Important Notes:</Title2> */}
-           {/* <Description>
-            <ul>
-              <li>
- If you are purchasing in NGN, kindly ensure that the currecy switch is turned to NGN, but if you do not have NGN access, you can purchase in USD by turning the curreny switch on top of the page to USD. 
-              </li>
-              <li>
-Please Ensure you enter your correct email address while purchasing
-              </li>
-              <li>
-                 After you have purchased, kindly check the email that you have entered as we must have sent the access to your purchased product there.
-              </li>
-              <li>
-In case you didn't receive the access email after your purchase for what so ever reason, kindly contact us <span style={{color:"orange", fontWeight:"bold", cursor:"pointer", textDecoration:"underline"}}
-onClick={()=>navigate('/contactus')}>HERE</span>, we are always available to help you. Thanks.
-              </li>
-            </ul>
-           </Description> */}
-           <Description></Description>
-            <Description></Description>
-          
+                   
         </Info>
-      </ContentWrapper>
+      </ContentWrapper> */}
+
+      <ContentWrapper>
+  <Image
+    src={product.coverImageUrl}
+    alt={product.title}
+    onError={(e) => {
+      e.target.src = 'https://via.placeholder.com/300x200?text=Image+Not+Available';
+    }}
+  />
+  <Info>
+    <Title>{product.title.toUpperCase()}</Title>
+    <PriceContainer>
+      <MainPrice>₦{new Intl.NumberFormat('en-US').format(product.priceInNgn)}</MainPrice>
+      <SubPrice>(${new Intl.NumberFormat('en-US').format(product.priceInUsd)})</SubPrice>
+    </PriceContainer>
+    
+    <Description>{product.description}</Description>
+    <BuyButton onClick={() => {setShowModal(true); setCurrency('NGN')}}>
+      Buy Now (₦{new Intl.NumberFormat('en-US').format(product.priceInNgn)})
+    </BuyButton><br/>
+    <BuyButton onClick={() => {setShowModal(true); setCurrency('USD')}}>
+      Buy Now (${new Intl.NumberFormat('en-US').format(product.priceInUsd)})
+    </BuyButton>
+
+    <Outline>
+      <Title2>What you will Learn:</Title2>
+    
+        <ul>
+          {product?.outlines?.split('\n').map((line, index) => (
+            line.trim() !== '' && <li key={index}>{line}</li>
+          ))}
+        </ul>
+ 
+    </Outline>
+
+    <p style={{ margin: "15px 0", fontSize: "0.95rem", color: "white", lineHeight: "1.5" }}>
+  DO YOU WANT TO BUILD YOUR PORTFOLIO?{" "}
+  <a 
+    href="https://myportfolioechobyte.vercel.app/" 
+    target="_blank" 
+    rel="noopener noreferrer" 
+    style={{ color: "#6366f1", fontWeight: "700", textDecoration: "underline" }}
+  >
+    CLICK HERE TO START
+  </a>
+</p>
+<p style={{ margin: "15px 0", fontSize: "0.95rem", color: "white", lineHeight: "1.5" }}>
+  TO START SELLING DIGITAL PRODUCTS AND SERVICES?{" "}
+  <a 
+    href="https://echobytedigitalmarketplace.vercel.app/" 
+    target="_blank" 
+    rel="noopener noreferrer" 
+    style={{ color: "#6366f1", fontWeight: "700", textDecoration: "underline" }}
+  >
+    CLICK HERE TO START
+  </a>
+</p>
+  </Info>
+</ContentWrapper>
 
       {showModal && (
         <PaymentModal

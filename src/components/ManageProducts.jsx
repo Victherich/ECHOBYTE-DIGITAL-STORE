@@ -685,10 +685,10 @@ const publicId = publicIdParts.join('/');
   Change Product Image
 </ActionButton>
  </ButtonGroup>
-            <h3 style={{textDecoration:"underline"}}>Outlines</h3>
+            {/* <h3 style={{textDecoration:"underline"}}>Outlines</h3> */}
             <ButtonGroup>
-              <ActionButton variant="view" onClick={() => {setShowOutlineModal(true);setSelectedProductId(product.id);setSelectedProductTitle(product.title)}}>Post Outline</ActionButton>
-               <ActionButton variant="view" onClick={() => {setShowOutlineModal2(true);setSelectedProductId(product.id);setSelectedProductTitle(product.title)}}>Veiw / Edit Outline</ActionButton>
+              <ActionButton variant="view" onClick={() => {setShowOutlineModal(true);setSelectedProductId(product.id);setSelectedProductTitle(product.title)}}>Manage Outlines</ActionButton>
+
            
             </ButtonGroup>
 

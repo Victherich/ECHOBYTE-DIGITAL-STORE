@@ -24,7 +24,28 @@ const LandingPage = () => {
       <LatestProducts/>
         <AccountInfoPage/>
       {/* <CourseVideo/> */}
-      
+        <p style={{textAlign:"center",padding:"10px", fontSize: "0.95rem", color: "white", lineHeight: "1.5" }}>
+  DO YOU WANT TO BUILD YOUR PORTFOLIO?{" "}
+  <a 
+    href="https://myportfolioechobyte.vercel.app/" 
+    target="_blank" 
+    rel="noopener noreferrer" 
+    style={{ color: "#6366f1", fontWeight: "700", textDecoration: "underline" }}
+  >
+    CLICK HERE TO START
+  </a>
+</p>
+ <p style={{textAlign:"center",padding:"10px", fontSize: "0.95rem", color: "white", lineHeight: "1.5" }}>
+  TO START SELLING DIGITAL PRODUCTS AND SERVICES?{" "}
+  <a 
+    href="https://echobytedigitalmarketplace.vercel.app/" 
+    target="_blank" 
+    rel="noopener noreferrer" 
+    style={{ color: "#6366f1", fontWeight: "700", textDecoration: "underline" }}
+  >
+    CLICK HERE TO START
+  </a>
+</p>
     </div>
   )
 }

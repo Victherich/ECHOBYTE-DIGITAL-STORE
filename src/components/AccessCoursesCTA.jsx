@@ -22,7 +22,7 @@ const Section = styled.section`
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 3rem 1.5rem;
+  padding: 1rem 0.1rem;
   text-align: center;
   flex-direction: column;
   overflow: hidden;
@@ -32,7 +32,7 @@ const Heading = styled.h1`
   font-size: 2.8rem;
   font-weight: 800;
   color: #facc15;
-  margin-bottom: 1rem;
+  // margin-bottom: 1rem;
   animation: ${fadeUp} 1s ease forwards;
 `;
 
@@ -40,7 +40,7 @@ const SubText = styled.p`
   font-size: 1.1rem;
   color: #d1d5db;
   max-width: 700px;
-  margin-bottom: 2rem;
+  // margin-bottom: 2rem;
   line-height: 1.7;
   animation: ${fadeUp} 1.2s ease forwards;
 `;
