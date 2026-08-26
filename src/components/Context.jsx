@@ -667,9 +667,15 @@ const ContextProvider = ({ children }) => {
   }, []);
 
   // ------------------- CORE FUNCTION -------------------
+// ------------------- CORE FUNCTION -------------------
+// ------------------- CORE FUNCTION -------------------
   const saveTransaction = async (transaction, customerDetails) => {
     try {
-      const { name, email, phone, paymentMethod, password } = customerDetails || {};
+      const rawEmail = customerDetails?.email || getSafeLocalStorage("userEmail");
+      const email = rawEmail ? rawEmail.trim().toLowerCase() : "";
+      let name = customerDetails?.name;
+      const phone = customerDetails?.phone || "";
+      const paymentMethod = customerDetails?.paymentMethod || "paystack";
 
       // ✅ Retrieve pending values safely with fallbacks
       const amount = getSafeLocalStorage("pendingAmount") || transaction?.amount || 0;
@@ -678,8 +684,8 @@ const ContextProvider = ({ children }) => {
       const productUrl = getSafeLocalStorage("pendingProductUrl") || transaction?.productUrl || "";
       const currencyVal = getSafeLocalStorage("pendingCurrency") || transaction?.currency || "NGN";
 
-      if (!email || !name) {
-        throw new Error("Customer email and name are required for account setup.");
+      if (!email) {
+        throw new Error("Customer email is required for transaction processing.");
       }
 
       // Step 1: Check if user exists in Firestore
@@ -688,13 +694,23 @@ const ContextProvider = ({ children }) => {
       const querySnapshot = await getDocs(q);
 
       let userId;
+      let existingUserData = null;
 
-      if (querySnapshot.empty) {
+      if (!querySnapshot.empty) {
+        existingUserData = querySnapshot.docs[0].data();
+        userId = existingUserData.uid;
+        // Fallback to stored Firestore name if checkout name wasn't passed
+        if (!name) {
+          name = existingUserData.name || "Valued Customer";
+        }
+        console.log("Existing user found, skipping Auth creation:", userId);
+      } else {
         console.log("User not found, creating new Firebase Auth user...");
         
-        // 🛡️ Bulletproof fallback password if missing
-        const safePassword = password && password.trim().length >= 6 
-          ? password 
+        if (!name) name = "Valued Customer";
+
+        const safePassword = customerDetails?.password && customerDetails.password.trim().length >= 6 
+          ? customerDetails.password 
           : Math.random().toString(36).slice(-8) + "A1!";
 
         const userCredential = await createUserWithEmailAndPassword(
@@ -710,15 +726,12 @@ const ContextProvider = ({ children }) => {
           uid: newUser.uid,
           name,
           email,
-          phone: phone || "",
+          phone,
           role: "user",
           createdAt: new Date(),
         });
 
         userId = newUser.uid;
-      } else {
-        userId = querySnapshot.docs[0].data().uid;
-        console.log("Existing user found:", userId);
       }
 
       // Step 2: Save transaction record
@@ -731,10 +744,10 @@ const ContextProvider = ({ children }) => {
         paidAt: new Date().toISOString(),
         customerName: name,
         customerEmail: email,
-        customerPhone: phone || "",
+        customerPhone: phone || existingUserData?.phone || "",
         amountPaid: amount,
         currency: currencyVal,
-        paymentMethod: paymentMethod || "paystack",
+        paymentMethod,
         userId,
         sellerEmail: "echobyteconcept@gmail.com",
       };
@@ -756,15 +769,16 @@ const ContextProvider = ({ children }) => {
       setTransactionSuccess(true);
       
     } catch (error) {
-      console.error("Error saving transaction or creating user:", error);
+      console.error("Error saving transaction or handling user:", error);
       Swal.fire({
         icon: "error",
         title: "Transaction Completion Failed",
         text: error.message || "Failed to process transaction. Please contact support.",
       });
-      throw error; // Rethrow so the caller knows it failed
+      throw error; 
     }
   };
+  
 
   // ------------------- EMAIL FUNCTION -------------------
   const sendTransactionEmails = async (transactionDetails) => {
