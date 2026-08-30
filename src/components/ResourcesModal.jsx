@@ -1,3 +1,6 @@
+
+
+
 // // ResourcesModal.jsx
 // import React, { useState, useEffect } from 'react';
 // import styled from 'styled-components';
@@ -25,6 +28,12 @@
 //   overflow-y: auto;
 // `;
 
+// const NestedModalContent = styled(ModalContent)`
+//   max-width: 500px;
+//   background: #111827;
+//   border: 1px solid #374151;
+// `;
+
 // const Label = styled.label`
 //   display: block;
 //   margin-bottom: 0.5rem;
@@ -38,7 +47,7 @@
 //   margin-bottom: 1rem;
 //   border: 1px solid #374151;
 //   border-radius: 0.5rem;
-//   background: #111827;
+//   background: #1f2937;
 //   color: white;
 // `;
 
@@ -48,7 +57,7 @@
 //   margin-bottom: 1rem;
 //   border: 1px solid #374151;
 //   border-radius: 0.5rem;
-//   background: #111827;
+//   background: #1f2937;
 //   color: white;
 //   resize: vertical;
 //   min-height: 80px;
@@ -103,6 +112,9 @@
 //   const [description, setDescription] = useState('');
 //   const [link, setLink] = useState('https://');
 //   const [editIndex, setEditIndex] = useState(null); // null means adding a new one, number means editing
+
+//   // Modal toggle state for the resource form
+//   const [isFormModalOpen, setIsFormModalOpen] = useState(false);
 
 //   // Fetch existing resources array from Firebase when modal opens
 //   useEffect(() => {
@@ -167,7 +179,7 @@
 //       });
 
 //       setResources(updatedResources);
-//       resetForm();
+//       closeFormModal();
 //       Swal.fire('Success', editIndex !== null ? 'Resource updated!' : 'Resource added!', 'success');
 //     } catch (error) {
 //       console.error(error);
@@ -175,13 +187,20 @@
 //     }
 //   };
 
-//   // Populate form fields for editing
+//   // Open form modal for creating a new resource
+//   const handleOpenAddModal = () => {
+//     resetForm();
+//     setIsFormModalOpen(true);
+//   };
+
+//   // Populate form fields for editing and open form modal
 //   const handleEditClick = (index) => {
 //     const res = resources[index];
 //     setTitle(res.title);
 //     setDescription(res.description);
 //     setLink(res.link.startsWith('https://') ? res.link : 'https://' + res.link);
 //     setEditIndex(index);
+//     setIsFormModalOpen(true);
 //   };
 
 //   // Delete a resource from the list and update Firestore
@@ -222,55 +241,25 @@
 //     setEditIndex(null);
 //   };
 
+//   const closeFormModal = () => {
+//     resetForm();
+//     setIsFormModalOpen(false);
+//   };
+
 //   return (
 //     <ModalOverlay>
 //       <ModalContent>
-//         <h2 style={{ marginBottom: '1rem' }}>
-//           Manage Resources for {selectedProductTitle}
-//         </h2>
+//         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem' }}>
+//           <h2 style={{ margin: 0 }}>
+//             Manage Resources for {selectedProductTitle}
+//           </h2>
+//           <Button onClick={handleOpenAddModal}>+ Add Resource</Button>
+//         </div>
 
 //         {loading ? (
 //           <p style={{ textAlign: 'center', margin: '2rem 0' }}>Loading resources...</p>
 //         ) : (
 //           <>
-//             {/* Form for Creating / Editing a Resource */}
-//             <form onSubmit={handleSaveResource} style={{ background: '#111827', padding: '1rem', borderRadius: '0.5rem', marginBottom: '1.5rem', border: '1px solid #374151' }}>
-//               <h3 style={{ fontSize: '1rem', marginBottom: '0.75rem', color: '#34d399' }}>
-//                 {editIndex !== null ? 'Edit Resource' : 'Add New Resource'}
-//               </h3>
-
-//               <Label>Title</Label>
-//               <Input
-//                 type="text"
-//                 placeholder="Resource title..."
-//                 value={title}
-//                 onChange={(e) => setTitle(e.target.value)}
-//                 required
-//               />
-
-//               <Label>Description</Label>
-//               <TextArea
-//                 placeholder="Short description of the resource..."
-//                 value={description}
-//                 onChange={(e) => setDescription(e.target.value)}
-//               />
-
-//               <Label>Link (Must start with https://)</Label>
-//               <Input
-//                 type="text"
-//                 value={link}
-//                 onChange={handleLinkChange}
-//                 required
-//               />
-
-//               <div style={{ display: 'flex', gap: '0.5rem' }}>
-//                 <Button type="submit">{editIndex !== null ? 'Update Resource' : 'Add Resource'}</Button>
-//                 {editIndex !== null && (
-//                   <Button type="button" bgColor="#6b7280" onClick={resetForm}>Cancel Edit</Button>
-//                 )}
-//               </div>
-//             </form>
-
 //             {/* List of Existing Resources */}
 //             <h3 style={{ fontSize: '1rem', marginBottom: '0.75rem' }}>Existing Resources ({resources.length})</h3>
 //             {resources.length === 0 ? (
@@ -291,11 +280,53 @@
 //               ))
 //             )}
 
-//             {/* Close Modal Button */}
+//             {/* Close Main Modal Button */}
 //             <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '1.5rem' }}>
 //               <Button bgColor="#4b5563" onClick={onClose}>Close Modal</Button>
 //             </div>
 //           </>
+//         )}
+
+//         {/* Nested Modal for Adding/Editing a Resource */}
+//         {isFormModalOpen && (
+//           <ModalOverlay style={{ zIndex: 1000 }}>
+//             <NestedModalContent>
+//               <h3 style={{ fontSize: '1.1rem', marginBottom: '1rem', color: '#34d399' }}>
+//                 {editIndex !== null ? 'Edit Resource' : 'Add New Resource'}
+//               </h3>
+
+//               <form onSubmit={handleSaveResource}>
+//                 <Label>Title</Label>
+//                 <Input
+//                   type="text"
+//                   placeholder="Resource title..."
+//                   value={title}
+//                   onChange={(e) => setTitle(e.target.value)}
+//                   required
+//                 />
+
+//                 <Label>Description</Label>
+//                 <TextArea
+//                   placeholder="Short description of the resource..."
+//                   value={description}
+//                   onChange={(e) => setDescription(e.target.value)}
+//                 />
+
+//                 <Label>Link (Must start with https://)</Label>
+//                 <Input
+//                   type="text"
+//                   value={link}
+//                   onChange={handleLinkChange}
+//                   required
+//                 />
+
+//                 <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '0.5rem', marginTop: '1.5rem' }}>
+//                   <Button type="submit">{editIndex !== null ? 'Update Resource' : 'Save Resource'}</Button>
+//                   <Button type="button" bgColor="#6b7280" onClick={closeFormModal}>Cancel</Button>
+//                 </div>
+//               </form>
+//             </NestedModalContent>
+//           </ModalOverlay>
 //         )}
 //       </ModalContent>
 //     </ModalOverlay>
@@ -303,6 +334,9 @@
 // };
 
 // export default ResourcesModal;
+
+
+
 
 
 
@@ -320,6 +354,7 @@ const ModalOverlay = styled.div`
   background: rgba(0, 0, 0, 0.6);
   display: flex; align-items: center; justify-content: center;
   z-index: 999;
+  padding: 1rem;
 `;
 
 const ModalContent = styled.div`
@@ -331,12 +366,41 @@ const ModalContent = styled.div`
   color: white;
   max-height: 90vh;
   overflow-y: auto;
+
+  @media (max-width: 640px) {
+    padding: 1.25rem;
+    border-radius: 0.5rem;
+    max-height: 95vh;
+  }
 `;
 
 const NestedModalContent = styled(ModalContent)`
   max-width: 500px;
   background: #111827;
   border: 1px solid #374151;
+`;
+
+const ModalHeader = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  gap: 1rem;
+
+  h2 {
+    margin: 0;
+    font-size: 1.25rem;
+
+    @media (max-width: 640px) {
+      font-size: 1.05rem;
+    }
+  }
+
+  @media (max-width: 640px) {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.75rem;
+  }
 `;
 
 const Label = styled.label`
@@ -354,6 +418,10 @@ const Input = styled.input`
   border-radius: 0.5rem;
   background: #1f2937;
   color: white;
+
+  @media (max-width: 640px) {
+    padding: 0.65rem;
+  }
 `;
 
 const TextArea = styled.textarea`
@@ -366,6 +434,10 @@ const TextArea = styled.textarea`
   color: white;
   resize: vertical;
   min-height: 80px;
+
+  @media (max-width: 640px) {
+    padding: 0.65rem;
+  }
 `;
 
 const Button = styled.button`
@@ -377,9 +449,16 @@ const Button = styled.button`
   cursor: pointer;
   font-weight: bold;
   font-size: 0.85rem;
+  white-space: nowrap;
 
   &:hover {
     opacity: 0.9;
+  }
+
+  @media (max-width: 640px) {
+    width: 100%;
+    text-align: center;
+    padding: 0.65rem 1rem;
   }
 `;
 
@@ -393,19 +472,61 @@ const ResourceCard = styled.div`
   justify-content: space-between;
   align-items: flex-start;
   gap: 1rem;
+
+  @media (max-width: 640px) {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.75rem;
+  }
 `;
 
 const ResourceInfo = styled.div`
-  word-break: break-all;
-  h4 { margin: 0 0 0.25rem 0; color: #34d399; }
-  p { margin: 0 0 0.5rem 0; font-size: 0.9rem; color: #9ca3af; }
-  a { font-size: 0.85rem; color: #60a5fa; text-decoration: none; &:hover { text-decoration: underline; } }
+  word-break: break-word;
+  overflow-wrap: break-word;
+  flex: 1;
+
+  h4 { 
+    margin: 0 0 0.25rem 0; 
+    color: #34d399; 
+    font-size: 1rem;
+  } 
+  p { 
+    margin: 0 0 0.5rem 0; 
+    font-size: 0.9rem; 
+    color: #9ca3af; 
+  } 
+  a { 
+    font-size: 0.85rem; 
+    color: #60a5fa; 
+    text-decoration: none; 
+    &:hover { text-decoration: underline; } 
+  }
 `;
 
 const ActionButtons = styled.div`
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+
+  @media (max-width: 640px) {
+    flex-direction: row;
+    width: 100%;
+    
+    button {
+      flex: 1;
+    }
+  }
+`;
+
+const FormButtonContainer = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  margin-top: 1.5rem;
+
+  @media (max-width: 640px) {
+    flex-direction: column-reverse;
+  }
 `;
 
 const ResourcesModal = ({ productId, onClose, selectedProductTitle }) => {
@@ -554,12 +675,10 @@ const ResourcesModal = ({ productId, onClose, selectedProductTitle }) => {
   return (
     <ModalOverlay>
       <ModalContent>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem' }}>
-          <h2 style={{ margin: 0 }}>
-            Manage Resources for {selectedProductTitle}
-          </h2>
+        <ModalHeader>
+          <h2>Manage Resources for {selectedProductTitle}</h2>
           <Button onClick={handleOpenAddModal}>+ Add Resource</Button>
-        </div>
+        </ModalHeader>
 
         {loading ? (
           <p style={{ textAlign: 'center', margin: '2rem 0' }}>Loading resources...</p>
@@ -625,10 +744,10 @@ const ResourcesModal = ({ productId, onClose, selectedProductTitle }) => {
                   required
                 />
 
-                <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '0.5rem', marginTop: '1.5rem' }}>
+                <FormButtonContainer>
                   <Button type="submit">{editIndex !== null ? 'Update Resource' : 'Save Resource'}</Button>
                   <Button type="button" bgColor="#6b7280" onClick={closeFormModal}>Cancel</Button>
-                </div>
+                </FormButtonContainer>
               </form>
             </NestedModalContent>
           </ModalOverlay>
