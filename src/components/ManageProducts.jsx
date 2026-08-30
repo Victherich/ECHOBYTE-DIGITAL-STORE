@@ -13,6 +13,7 @@ import ViewOutlineModal from './ViewOutlinesModal';
 import ProductEditModal from './ProductEditModal';
 // import logo from '../Images/logo.jpeg'
 import LessonsModal from './LessonsModal';
+import ResourcesModal from './ResourcesModal';
 
 // Styled Components
 const PageContainer = styled.div`
@@ -182,6 +183,7 @@ const [currentProduct, setCurrentProduct] = useState(null);
   const [selectedCategoryName, setSelectedCategoryName] = useState('') ;
    const [expandedProduct, setExpandedProduct] = useState(null); // new state
    const [showLessonsModal, setShowLessonsModal]=useState(false);
+     const [showResourcesModal, setShowResourcesModal]=useState(false);
 
   //  console.log(products)
 
@@ -691,8 +693,8 @@ const publicId = publicIdParts.join('/');
 
            
             </ButtonGroup>
-
-            <ActionButton
+<ButtonGroup>
+          <ActionButton
   variant="view"
   onClick={() => {
     setShowLessonsModal(true);
@@ -702,6 +704,34 @@ const publicId = publicIdParts.join('/');
 >
   Manage Lessons
 </ActionButton>
+
+
+</ButtonGroup>
+          {/* <ActionButton
+  variant="view"
+  onClick={() => {
+    setShowLessonsModal(true);
+    setSelectedProductId(product.id);
+    setSelectedProductTitle(product.title);
+  }}
+>
+  Manage Lessons
+</ActionButton> */}
+  
+
+<ButtonGroup>
+          <ActionButton
+  variant="view"
+  onClick={() => {
+    setShowResourcesModal(true);
+    setSelectedProductId(product.id);
+    setSelectedProductTitle(product.title);
+  }}
+>
+  Manage Resources
+</ActionButton>
+  
+</ButtonGroup>
             </>}
           </ProductCard>
         ))}
@@ -748,6 +778,14 @@ const publicId = publicIdParts.join('/');
   />
 )}
 
+
+{showResourcesModal && (
+  <ResourcesModal
+    productId={selectedProductId}
+    selectedProductTitle={selectedProductTitle}
+    onClose={() => setShowResourcesModal(false)}
+  />
+)}
 
 
     </PageContainer>

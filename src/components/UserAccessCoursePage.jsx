@@ -273,6 +273,7 @@ import { db } from '../firebaseConfig';
 import { doc, getDoc, collection, query, where, orderBy, getDocs } from 'firebase/firestore';
 import { FaArrowLeft, FaPlayCircle } from 'react-icons/fa';
 import CourseVideo from './CourseVideo'; // ✅ video player
+import CourseResources from './CourseResources';
 
 // Styled components
 const Container = styled.div`
@@ -569,6 +570,8 @@ const UserAccessCoursePage = ({ id, onBack }) => {
           ))
         )}
       </LessonList>
+      <br/>
+      <CourseResources courseId={id}/>
     </Container>
   );
 };
