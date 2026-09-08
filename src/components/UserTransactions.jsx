@@ -856,13 +856,13 @@ const UserTransactions = () => {
 
                   <CardTitle>{tx.productName || tx.product?.title}</CardTitle>
 
-                  <PriceContainer>
+                  {/* <PriceContainer>
                     <MainPrice>
                       {tx.currency === "NGN"
                         ? `₦${new Intl.NumberFormat("en-US").format(tx.amountPaid)}`
                         : `$${new Intl.NumberFormat("en-US").format(tx.amountPaid)}`}
                     </MainPrice>
-                  </PriceContainer>
+                  </PriceContainer> */}
 
                   <InfoText>Payment Method: {tx.paymentMethod}</InfoText>
                   <InfoText>Transaction Ref: {tx.transactionReference}</InfoText>

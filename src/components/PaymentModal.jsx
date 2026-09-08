@@ -171,18 +171,20 @@ const [formStep, setFormStep] = useState("initial"); // 'initial', 'new_user', '
   const PAYPAL_CLIENT_ID =
     "AY3JP-UI68WChZpC_0f7oTadUrItrOcSwqL2E4GVFJHfo-4QPabv308FQRUTfmDS4jfNFYi9AbLZh9iV";
 
-  // ------------------- PAYSTACK -------------------
+
+
+    // ------------------- PAYSTACK -------------------
   const payWithPaystack = () => {
   
-
     dispatch(setPaymentSession("payment"));
     Swal.fire({ text: "Please wait...", allowOutsideClick: false });
     Swal.showLoading();
 
     const paystack = new PaystackPop();
     const [firstName, lastName] = name.split(" ");
+    const verificationNumber = `${Date.now()}E${Math.floor(Math.random() * 1000000000)}`;
 
-     // ✅ Prepare and store the customer details & pre-transaction info
+    // ✅ Prepare and store the customer details & pre-transaction info
   const customerDetails = {
     name,
     email,
@@ -198,9 +200,9 @@ const [formStep, setFormStep] = useState("initial"); // 'initial', 'new_user', '
     email,
     reference: null,
     createdAt: new Date().toISOString(),
-    metadata: { custom_payment_type: "payment1" },
-
-    
+    metadata: { 
+      custom_payment_type: verificationNumber
+     },  
   };
 
   // ✅ Save both to localStorage immediately before Paystack popup opens
@@ -209,14 +211,14 @@ const [formStep, setFormStep] = useState("initial"); // 'initial', 'new_user', '
     JSON.stringify({ transaction: initialTransaction, customerDetails })
   );
 
-    localStorage.setItem("pendingAmount", JSON.stringify(amount));
+  localStorage.setItem("pendingAmount", JSON.stringify(amount));
   localStorage.setItem("pendingProductName", JSON.stringify(productName));
   localStorage.setItem("pendingProductId", JSON.stringify(productId));
   localStorage.setItem("pendingProductUrl", JSON.stringify(productUrl));
   localStorage.setItem("pendingCurrency", JSON.stringify(currency));
 
  // Generate a unique verification number
-const verificationNumber = `${Date.now()}E${Math.floor(Math.random() * 1000000000)}`;
+
 // Save it to localStorage
 localStorage.setItem("verificationNumber", JSON.stringify(verificationNumber));
 

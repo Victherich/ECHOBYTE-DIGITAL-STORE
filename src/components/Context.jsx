@@ -666,8 +666,7 @@ const ContextProvider = ({ children }) => {
     };
   }, []);
 
-  // ------------------- CORE FUNCTION -------------------
-// ------------------- CORE FUNCTION -------------------
+
 // ------------------- CORE FUNCTION -------------------
   const saveTransaction = async (transaction, customerDetails) => {
     try {

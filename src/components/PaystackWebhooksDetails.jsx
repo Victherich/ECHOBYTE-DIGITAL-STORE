@@ -94,6 +94,8 @@ export default function PaystackWebhooksPage() {
   const [webhooks, setWebhooks] = useState([]);
   const [loading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState("");
+  
+  console.log("Rendering PaystackWebhooksPage with webhooks:", webhooks);
 
   useEffect(() => {
     const fetchWebhooks = async () => {
