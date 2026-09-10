@@ -20,6 +20,8 @@ import FirstLoginPasswordModal from './FirstLoginPasswordModal.jsx';
 import AllUsersPage from './AllUsersPage.jsx';
 import AllTransactionsPage from './AllTransactionsPage.jsx';
 import PaystackWebhooksPage from './PaystackWebhooksDetails.jsx';
+import CreateUserPage from './CreateUserInfo.jsx';
+import CreateTransactionPage from './CreateTransactionPage.jsx';
 
 // Styled Components
 const DashboardContainer = styled.div`
@@ -194,6 +196,10 @@ const AdminDashboard = () => {
         return <AllTransactionsPage />;
          case 'paystackwebhookdetails':
         return <PaystackWebhooksPage />;
+           case 'createuserinfo':
+        return <CreateUserPage/>;
+          case 'createusertransaction':
+        return <CreateTransactionPage/>;
       default:
         return <h1 style={{ color: '#facc15' }}>Dashboard Home</h1>;
     }
@@ -258,6 +264,20 @@ const AdminDashboard = () => {
             onClick={() => handleMenuClick('adminsignup')}
           >
             Register Admin
+          </SidebarMenuItem>:''}
+
+            {role==='admin'?<SidebarMenuItem
+            active={activeMenu === 'createuserinfo'}
+            onClick={() => handleMenuClick('createuserinfo')}
+          >
+            Create User Info
+          </SidebarMenuItem>:''}
+
+           {role==='admin'?<SidebarMenuItem
+            active={activeMenu === 'createusertransaction'}
+            onClick={() => handleMenuClick('createusertransaction')}
+          >
+            Create User Transactions
           </SidebarMenuItem>:''}
 
             {role==='admin'?<SidebarMenuItem

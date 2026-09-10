@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import styled from "styled-components";
-import {Context} from './Context'
+import { Context } from "./Context";
 import Swal from "sweetalert2";
 
 const VerifyPaymentButton = ({
@@ -10,21 +10,33 @@ const VerifyPaymentButton = ({
   const { startPaymentPolling1 } = useContext(Context);
 
   const handleVerifyPayment = () => {
-    // Retrieve the verification number saved earlier
-    const verificationNumber = JSON.parse(
-      localStorage.getItem("verificationNumber")
-    );
+    let customReference = null;
+    
+    // ✅ Safely retrieve the reference matching how it was saved in PaystackCheckout
+    try {
+      const raw = localStorage.getItem("current_payment_ref");
+      customReference = raw ? JSON.parse(raw) : null;
+    } catch (e) {
+      // Fallback if it was stored as a raw unquoted string
+      customReference = localStorage.getItem("current_payment_ref");
+    }
 
-    if (!verificationNumber) {
+    if (!customReference) {
       Swal.fire({
         icon: "warning",
-        text: "Verification number not found. Please initiate the payment again.",
+        text: "Payment reference not found. Please initiate the payment again.",
       });
       return;
     }
 
-    // Start polling for payment verification
-    startPaymentPolling1(verificationNumber);
+    Swal.fire({
+      text: "Checking payment status...",
+      allowOutsideClick: false,
+      didOpen: () => Swal.showLoading(),
+    });
+
+    // Manually start polling using the exact customReference
+    startPaymentPolling1(customReference);
   };
 
   return (
