@@ -33,6 +33,7 @@ import Header2 from './components/Header2';
 import TermsAndConditions from './components/TermsAndConditions';
 import PrivacyPolicy from './components/PrivacyPolicy';
 import VirtualAssistantPromo from './components/VAPromoPage';
+import FlutterwavePaymentSuccess from './components/FlutterwavePaymentSuccess';
 
 
 
@@ -72,6 +73,7 @@ const paymentSession = useSelector(state=>state.paymentSession);
         <Route path='/termsandconditions' element={<TermsAndConditions/>}/>
         <Route path='/privacypolicy' element={<PrivacyPolicy/>}/>
         <Route path='/vapromo' element={<VirtualAssistantPromo/>}/>
+        <Route path='/payment-success' element={<FlutterwavePaymentSuccess/>}/>
       </Routes>
       {/* <CompanyCertificate/> */}
       {paymentSession&&<PaymentInProgressModal/>}
