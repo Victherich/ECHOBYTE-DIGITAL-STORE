@@ -193,9 +193,13 @@ const ProductEditModal = ({ product, onClose, onUpdate, selectedProductTitle }) 
           <Label>Price in NGN (₦)</Label>
           <Input name="priceInNgn" type="number" value={formData.priceInNgn} onChange={handleChange} />
         </Field>
-        <Field>
+        {/* <Field>
           <Label>Price in USD ($)</Label>
           <Input name="priceInUsd" type="number" value={formData.priceInUsd} onChange={handleChange} />
+        </Field> */}
+         <Field>
+          <Label>Strike Price in NGN (₦)</Label>
+          <Input name="strikePrice" type="number" value={formData.strikePrice} onChange={handleChange} />
         </Field>
         <Field>
           <Label>Category</Label>

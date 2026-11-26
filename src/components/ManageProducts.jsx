@@ -668,7 +668,11 @@ const publicId = publicIdParts.join('/');
           
   <Price>₦{new Intl.NumberFormat('en-US').format(product.priceInNgn)}</Price>
 
-  <Price>${new Intl.NumberFormat('en-US').format(product.priceInUsd)}</Price>
+<p style={{ textDecoration: 'line-through' }}>
+  ₦{new Intl.NumberFormat('en-US').format(product.strikePrice)}
+</p>
+
+  {/* <Price>${new Intl.NumberFormat('en-US').format(product.priceInUsd)}</Price> */}
 
 <p onClick={() => handleExpand(product.id)}
   style={{cursor:"pointer", textDecoration:"underline", fontStyle:"italic", marginBottom:"20px"}}>

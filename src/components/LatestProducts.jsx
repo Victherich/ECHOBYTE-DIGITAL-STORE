@@ -196,7 +196,8 @@ const fetchAllProducts = async () => {
         
 <PriceContainer>
   <MainPrice>₦{new Intl.NumberFormat('en-US').format(product.priceInNgn)}</MainPrice>
-  <SubPrice>(${new Intl.NumberFormat('en-US').format(product.priceInUsd)})</SubPrice>
+  {/* <SubPrice>(${new Intl.NumberFormat('en-US').format(product.priceInUsd)})</SubPrice> */}
+    <SubPrice style={{ textDecoration: 'line-through' }}>(₦{new Intl.NumberFormat('en-US').format(product.strikePrice)})</SubPrice>
 </PriceContainer>
 
 

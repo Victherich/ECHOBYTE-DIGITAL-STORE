@@ -454,6 +454,7 @@ export default function PostAProduct() {
   description: '',
   priceInNgn: '',
   priceInUsd:'',
+  strikePrice:'',
   url: '',
   categoryId: '',
   coverImageUrl: '',
@@ -510,6 +511,7 @@ const handleSubmit = async (e) => {
       ...formData,
       coverImageUrl: imageUrl,
       priceInNgn: Number(formData.priceInNgn),
+      strikePrice: Number(formData.strikePrice),
       priceInUsd:Number(formData.priceInUsd),
       createdAt: Timestamp.now(),
     });
@@ -526,6 +528,7 @@ const handleSubmit = async (e) => {
       description: '',
       priceInNgn: '',
       priceInUsd:'',
+      strikePrice:'',
       url: '',
       categoryId: '',
       coverImageUrl: '',
@@ -575,11 +578,21 @@ const handleSubmit = async (e) => {
             required
           />
 
-           <Label>Price in USD ($)</Label>
+           {/* <Label>Price in USD ($)</Label>
           <Input
             type="number"
             name="priceInUsd"
             value={formData.priceInUsd}
+            onChange={handleChange}
+            placeholder="e.g. 29.99"
+            required
+          /> */}
+
+             <Label>Strike Price in NGN (₦)</Label>
+          <Input
+            type="number"
+            name="strikePrice"
+            value={formData.strikePrice}
             onChange={handleChange}
             placeholder="e.g. 29.99"
             required
